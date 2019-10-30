@@ -147,8 +147,8 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 |Publisher|관련 Operator|
 |---|---|
 |[CombineLatest](./CombineLatest.md)|`combineLatest(_:)` / `combineLatest(_:_:)`|
-|CombineLatest3|`combineLatest(_:_:)` / `combineLatest(_:_:_:)`|
-|CombineLatest4|`combineLatest(_:_:_:)` / `combineLatest(_:_:_:_:)`|
+|[CombineLatest3](./CombineLatest3.md)|`combineLatest(_:_:)` / `combineLatest(_:_:_:)`|
+|[CombineLatest4](./CombineLatest4.md)|`combineLatest(_:_:_:)` / `combineLatest(_:_:_:_:)`|
 |[Merge](./Merge.md)|`merge(with:)`|
 |Merge3|`merge(with:_:)`|
 |Merge4|`merge(with:_:_:)`|
@@ -166,7 +166,7 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 |Publisher|관련 Operator|
 |---|---|
 |AssertNoFailure|`assertNoFailure(_:file:line:)`|
-|Catch|`catch(_:)`|
+|[Catch](./Catch.md)|`catch(_:)`|
 |TryCatch|`tryCatch(_:)`|
 |Retry|`retry(_:)`|
 
