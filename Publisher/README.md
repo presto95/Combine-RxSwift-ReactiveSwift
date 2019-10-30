@@ -109,7 +109,7 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 |Publisher|관련 Operator|
 |---|---|
 |[Comparison](./Comparison.md)|`max` 패밀리 / `min` 패밀리|
-|TryComparison|`tryMax(_:)` / `tryMin(_:)`|
+|[TryComparison](./TryComparison.md)|`tryMax(_:)` / `tryMin(_:)`|
 |[Count](./Count.md)|`count()`|
 
 #### Applying Matching Criteria to Elements
@@ -165,16 +165,16 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 
 |Publisher|관련 Operator|
 |---|---|
-|AssertNoFailure|`assertNoFailure(_:file:line:)`|
+|[AssertNoFailure](./AssertNoFailure.md)|`assertNoFailure(_:file:line:)`|
 |[Catch](./Catch.md)|`catch(_:)`|
-|TryCatch|`tryCatch(_:)`|
-|Retry|`retry(_:)`|
+|[TryCatch](./TryCatch.md)|`tryCatch(_:)`|
+|[Retry](./Retry.md)|`retry(_:)`|
 
 #### Adapting Publisher Types
 
 |Publisher|관련 Operator|
 |---|---|
-|SwitchToLatest|`switchToLatest()`|
+|[SwitchToLatest](./SwitchToLatest.md)|`switchToLatest()`|
 
 #### Controlling Timing
 
