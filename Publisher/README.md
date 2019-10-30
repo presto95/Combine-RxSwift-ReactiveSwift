@@ -150,16 +150,16 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 |[CombineLatest3](./CombineLatest3.md)|`combineLatest(_:_:)` / `combineLatest(_:_:_:)`|
 |[CombineLatest4](./CombineLatest4.md)|`combineLatest(_:_:_:)` / `combineLatest(_:_:_:_:)`|
 |[Merge](./Merge.md)|`merge(with:)`|
-|Merge3|`merge(with:_:)`|
-|Merge4|`merge(with:_:_:)`|
-|Merge5|`merge(with:_:_:_:)`|
-|Merge6|`merge(with:_:_:_:_:)`|
-|Merge7|`merge(with:_:_:_:_:_:)`|
-|Merge8|`merge(with:_:_:_:_:_:_:)`|
-|MergeMany|`merge(with:)`|
+|[Merge3](./Merge3.md)|`merge(with:_:)`|
+|[Merge4](./Merge4.md)|`merge(with:_:_:)`|
+|[Merge5](./Merge5.md)|`merge(with:_:_:_:)`|
+|[Merge6](./Merge6.md)|`merge(with:_:_:_:_:)`|
+|[Merge7](./Merge7.md)|`merge(with:_:_:_:_:_:)`|
+|[Merge8](./Merge8.md)|`merge(with:_:_:_:_:_:_:)`|
+|[MergeMany](./MergeMany.md)|`merge(with:)`|
 |[Zip](./Zip.md)|`zip(_:)` / `zip(_:_:)`|
-|Zip3|`zip(_:_:)` / `zip(_:_:_:)`|
-|Zip4|`zip(_:_:_:)` / `zip(_:_:_:_:)`|
+|[Zip3](./Zip3.md)|`zip(_:_:)` / `zip(_:_:_:)`|
+|[Zip4](./Zip4.md)|`zip(_:_:_:)` / `zip(_:_:_:_:)`|
 
 #### Handling Errors
 

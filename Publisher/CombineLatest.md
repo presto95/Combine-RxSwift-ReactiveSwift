@@ -2,12 +2,9 @@
 
 **제네릭 구조체** | 두 개의 Publisher로부터 최신의 요소를 전달받고 조합하는 Publisher
 
-이니셜라이저는 두 개의 인자를 받는다.
+이니셜라이저는 조합할 두 개의 Publisher를 받는다.
 
-- `a` : 조합할 Publisher 중 하나
-- `b` : 조합할 Publisher 중 또다른 하나
-
-`a` Publisher와 `b` Publisher의 에러 타입은 같아야 한다.
+인자에 들어가는 모든 Publisher의 에러 타입은 같아야 한다.
 
 두 개의 Publisher에서 최신의 요소를 발행했을 때 이들을 조합하는 동작을 원할 때 사용할 수 있다.
 

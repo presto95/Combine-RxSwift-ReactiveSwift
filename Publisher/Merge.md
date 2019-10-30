@@ -2,12 +2,9 @@
 
 **제네릭 구조체** | 두 개의 상위 Publisher에 결합 함수를 적용하여 생성되는 Publisher
 
-이니셜라이저는 두 개의 인자를 받는다.
+이니셜라이저는 조합할 두 개의 Publisher를 받는다.
 
-- `a` : 조합할 Publisher 중 하나
-- `b` : 조합할 Publisher 중 또다른 하나
-
-`a` Publisher와 `b` Publisehr의 Output 타입과 에러 타입은 같아야 한다.
+인자에 들어가는 모든 Publisher의 Output 타입과 에러 타입은 같아야 한다.
 
 두 개의 스트림을 하나로 합쳐 하나의 스트림을 다루는 것처럼 하기 위해 사용할 수 있다.
 
