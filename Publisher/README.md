@@ -19,7 +19,9 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 
 각 오퍼레이터는 `Publisher` 프로토콜을 구현하는 타입을 반환하며, 대부분은 `Publishers` 열거형의 익스텐션에 구현된 중첩 타입이다. 예를 들어 `map(_:)` 오퍼레이터는 `Publishers.Map` 구조체를 반환한다. 
 
-오퍼레이터의 이름과 Publisher의 이름이 항상 동일한 것은 아니다.
+오퍼레이터의 이름과 Publisher의 이름이 항상 동일한 것은 아니며, 오퍼레이터는 그 이름과 비슷한 이름을 가진 Publisher를 항상 반환한다고 말할 수 없다.
+
+예를 들어 오퍼레이터 수행 결과가 시퀀스 형태로 나오는 경우 `Publishers.Sequence`, 결과가 있을 수도 있고 없을 수도 있는 경우 `Optional.Publisher`, 결과가 성공 또는 실패 정보를 담는다면 `Result.Publisher` 등의 Publisher를 반환할 수 있다.
 
 ## RxSwift
 
@@ -46,7 +48,7 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 |[Future](./Future.md)|X|
 |[Just](./Just.md)|X|
 |[Deferred](./Deferred.md)|X|
-|[Empty](./Empty.md)|X|
+|[Empty](./Empty.md)|`ignoreOutput()`|
 |[Fail](./Fail.md)|X|
 |Record|X|
 
@@ -56,7 +58,7 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 
 |Publisher|관련 Operator|
 |---|---|
-|[Sequence](./Sequence.md)|`append(_:)` / `prepend(_:)`|
+|[Sequence](./Sequence.md)|`append(_:)` / `prepend(_:)` / `drop(while:)` / `prefix(while:)` / `prefix(_:)` / `output(in:)`|
 |[Catch](./Catch.md)|`catch(_:)`|
 
 #### Working with Subscribers
@@ -131,14 +133,14 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 |TryDropWhile|`tryDrop(while:)`|
 |[Concatenate](./Concatenate.md)|`append` 패밀리 / `prepend` 패밀리|
 |[Drop](./Drop.md)|`dropFirst(_:)`|
-|PrefixUntilOutput|`prefix(untilOutputFrom:)`|
-|PrefixWhile|`prefix(while:)`|
+|[PrefixUntilOutput](./PrefixUntilOutput.md)|`prefix(untilOutputFrom:)`|
+|[PrefixWhile](./PrefixWhile.md)|`prefix(while:)`|
 |[First](./First.md)|`first()`|
 |[Last](./Last.md)|`last()`|
 |TryFirstWhere|`tryFirst(where:)`|
 |TryLastWhere|`tryLast(where:)`|
 |TryPrefixWhile|`tryPrefix(while:)`|
-|Output|`prefix(_:)` / `output` 패밀리|
+|[Output](./Output.md)|`output` 패밀리|
 
 #### Combining Elements from Multiple Publishers
 
@@ -243,6 +245,6 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 | --------- | ------------- |
 |[AnyPublisher](./AnyPublisher.md)|`eraseToAnyPublisher()`|
 |NotificationCenter.Publisher|X|
-|[Optional.Publisher](./Optional.Publisher.md)|`first()` / `last()` / `first(where:)` / `last(where:)`|
+|[Optional.Publisher](./Optional.Publisher.md)|`first()` / `last()` / `first(where:)` / `last(where:)` / `dropFirst()` / `output(at:)`|
 |[Result.Publisher](./Result.Publisher.md)|`count()` / `contains(_:)` / `contains(where:)`|
 |[URLSession.DataTaskPublisher](./URLSession.DataTaskPublisher.md)|X|

@@ -9,7 +9,10 @@
 
 조건에 맞지 않을 때까지는 발행된 값을 무시하기 위해 사용한다.
 
-`drop(while:)` 오퍼레이터는 해당 Publisher를 반환한다.
+`drop(while:)` 오퍼레이터는 다음의 Publisher를 반환한다.
+
+- `Publishers.Sequence` Publisher를 반환한다.
+- 해당 Publisher를 반환한다.
 
 ```swift
 // 1 : Publishers.DropWhile Publisher
