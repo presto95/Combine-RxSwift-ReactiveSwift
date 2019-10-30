@@ -146,10 +146,10 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 
 |Publisher|관련 Operator|
 |---|---|
-|CombineLatest|`combineLatest(_:)` / `combineLatest(_:_:)`|
+|[CombineLatest](./CombineLatest.md)|`combineLatest(_:)` / `combineLatest(_:_:)`|
 |CombineLatest3|`combineLatest(_:_:)` / `combineLatest(_:_:_:)`|
 |CombineLatest4|`combineLatest(_:_:_:)` / `combineLatest(_:_:_:_:)`|
-|Merge|`merge(with:)`|
+|[Merge](./Merge.md)|`merge(with:)`|
 |Merge3|`merge(with:_:)`|
 |Merge4|`merge(with:_:_:)`|
 |Merge5|`merge(with:_:_:_:)`|
@@ -157,7 +157,7 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 |Merge7|`merge(with:_:_:_:_:_:)`|
 |Merge8|`merge(with:_:_:_:_:_:_:)`|
 |MergeMany|`merge(with:)`|
-|Zip|`zip(_:)` / `zip(_:_:)`|
+|[Zip](./Zip.md)|`zip(_:)` / `zip(_:_:)`|
 |Zip3|`zip(_:_:)` / `zip(_:_:_:)`|
 |Zip4|`zip(_:_:_:)` / `zip(_:_:_:_:)`|
 
