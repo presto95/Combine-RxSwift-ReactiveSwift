@@ -9,12 +9,10 @@
 
 `output`에 넘겨진 요소가 상위 Publisher에 존재하면 true를 반환하고 그렇지 않으면 false를 반환한다.
 
-`contains` 오퍼레이터는 다음의 Publisher를 반환한다.
+`contains(_:)` 오퍼레이터는 다음의 Publisher를 반환한다.
 
 - 성공 여부를 담아 `Result.Publisher` Publisher를 반환한다.
 - 해당 Publisher를 반환한다.
-
-`contains(_:)` 오퍼레이터는 해당 Publisher를 반환한다.
 
 ```swift
 // 1 : Publishers.Contains Publisher

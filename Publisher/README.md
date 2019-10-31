@@ -116,11 +116,11 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 
 |Publisher|관련 Operator|
 |---|---|
-|TryAllSatisfy|`tryAllSatisfy(_:)`|
+|[TryAllSatisfy](./TryAllSatisfy.md)|`tryAllSatisfy(_:)`|
 |[AllSatisfy](./AllSatisfy.md)|`allSatisfy(_:)`|
 |[Contains](./Contains.md)|`contains(_:)`|
 |[ContainsWhere](./ContainsWhere.md)|`contains(where:)`|
-|TryContainsWhere|`tryContains(where:)`|
+|[TryContainsWhere](./TryContainsWhere.md)|`tryContains(where:)`|
 
 #### Applying Sequence Operations to Elements
 
@@ -130,16 +130,16 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 |[LastWhere](./LastWhere.md)|`last(where:)`|
 |[DropUntilOutput](./DropUntilOutput.md)|`drop(untilOutputFrom:)`|
 |[DropWhile](./DropWhile.md)|`drop(while:)`|
-|TryDropWhile|`tryDrop(while:)`|
+|[TryDropWhile](./TryDropWhile.md)|`tryDrop(while:)`|
 |[Concatenate](./Concatenate.md)|`append` 패밀리 / `prepend` 패밀리|
 |[Drop](./Drop.md)|`dropFirst(_:)`|
 |[PrefixUntilOutput](./PrefixUntilOutput.md)|`prefix(untilOutputFrom:)`|
 |[PrefixWhile](./PrefixWhile.md)|`prefix(while:)`|
 |[First](./First.md)|`first()`|
 |[Last](./Last.md)|`last()`|
-|TryFirstWhere|`tryFirst(where:)`|
-|TryLastWhere|`tryLast(where:)`|
-|TryPrefixWhile|`tryPrefix(while:)`|
+|[TryFirstWhere](./TryFirstWhere.md)|`tryFirst(where:)`|
+|[TryLastWhere](./TryLastWhere.md)|`tryLast(where:)`|
+|[TryPrefixWhile](./TryPrefixWhere.md)|`tryPrefix(while:)`|
 |[Output](./Output.md)|`output` 패밀리|
 
 #### Combining Elements from Multiple Publishers
@@ -246,5 +246,5 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 |[AnyPublisher](./AnyPublisher.md)|`eraseToAnyPublisher()`|
 |NotificationCenter.Publisher|X|
 |[Optional.Publisher](./Optional.Publisher.md)|`first()` / `last()` / `first(where:)` / `last(where:)` / `dropFirst()` / `output(at:)`|
-|[Result.Publisher](./Result.Publisher.md)|`count()` / `contains(_:)` / `contains(where:)`|
+|[Result.Publisher](./Result.Publisher.md)|`count()` / `contains(_:)` / `contains(where:)` / `tryContains(where:)`|
 |[URLSession.DataTaskPublisher](./URLSession.DataTaskPublisher.md)|X|

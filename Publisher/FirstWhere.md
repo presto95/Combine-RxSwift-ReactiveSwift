@@ -11,7 +11,7 @@
 
 `first(where:)` 오퍼레이터는 다음의 Publisher를 반환한다.
 
-- 발행할 값이 없을 수 있으므로 `Optional.Publisher` Publisher를 반환한다.
+- 상위 Publisher의 에러 타입이 Never인 경우 `Optional.Publisher` Publisher를 반환한다.
 - 해당 Publisher를 반환한다.
 
 ```swift

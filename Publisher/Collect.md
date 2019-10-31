@@ -8,7 +8,7 @@
 
 종료를 내면 그 시점까지 모아 놓은 값들을 배열의 형태로 한꺼번에 낸다.
 
-인자를 취하지 않는 `collect` 오퍼레이터는 해당 Publisher를 반환한다.
+`collect()` 오퍼레이터는 해당 Publisher를 반환한다.
 
 ```swift
 let subject = PassthroughSubject<Int, Error>()
@@ -133,4 +133,3 @@ property.value = 2
 ## 참고
 
 [ReactiveX - Operators - To](http://reactivex.io/documentation/operators/to.html)
-
