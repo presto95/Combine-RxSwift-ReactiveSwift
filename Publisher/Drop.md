@@ -11,13 +11,10 @@
 
 초기값을 갖는 `CurrentValueSubject`를 사용하는 경우, 초기값을 무시하기 위해 사용할 수 있다.
 
-`dropFirst` 오퍼레이터는 는 다음의 Publisher를 반환한다.
-
-- 상위 Publisher에서 값을 낼 수 없을 만큼 요소를 생략할 수 있으므로 `Optional.Publisher` Publisher를 반환한다.
-- 해당 Publisher를 반환한다.
+`dropFirst` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.Drop Publisher
+// Publishers.Drop Publisher
 Publishers
   .Drop(upstream: Publishers.Sequence<[Int], Never>(sequence: [1, 2, 3]), count: 2)
   .sink(receiveCompletion: { completion in
@@ -32,7 +29,7 @@ Publishers
   })
   .store(in: &cancellables)
 
-// 2 : dropFirst Operator
+// dropFirst Operator
 Publishers.Sequence<[Int], Never>(sequence: [1, 2, 3])
   .dropFirst(2)
   .sink(receiveCompletion: { completion in
@@ -57,7 +54,7 @@ Publishers.Sequence<[Int], Never>(sequence: [1, 2, 3])
 
 ## RxSwift
 
-Observable 필터링 오퍼레이터 `skip(_:)`을 사용하여 구현할 수 있다.
+`skip` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 Observable.from([1, 2, 3])
@@ -77,7 +74,7 @@ Observable.from([1, 2, 3])
 
 ## ReactiveSwift
 
-`skip(first:)` 오퍼레이터를 사용하여 구현할 수 있다.
+`skip` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 SignalProducer([1, 2, 3])

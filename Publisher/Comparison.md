@@ -10,11 +10,14 @@
   - 클로저의 매 실행마다 이 두 개의 값을 비교하여 조건에 맞는 요소를 반환한다.
   - 조건에 따라 오름차순 및 내림차순 설정을 할 수 있다.
 
-상위 Publisher이 내는 값들을 정렬하는 것이 아니라, 오름차순 또는 내림차순 조건에 맞는 하나의 값만을 낸다.
+상위 Publisher이 내는 값들을 정렬하는 것이 아니라, 조건에 맞는 최종 하나의 값만을 낸다.
 
-`max`, `min` 오퍼레이터는 해당 Publisher를 반환한다. 이 때 Output 타입이 `Comparable` 프로토콜을 채택하는 경우 별도의 클로저를 구현할 필요가 없다.
+`max`, `min` 오퍼레이터와 관련이 있다.
+
+이 때 Output 타입이 `Comparable` 프로토콜을 채택하는 경우 별도의 클로저를 구현할 필요가 없다.
 
 ```swift
+// Publishers.Comparison Publisher
 Publishers
   .Comparison(upstream: Publishers.Sequence<[Int], Never>(sequence: [1, 3, 2, 5])) { $0 > $1 }
   .sink(receiveCompletion: { completion in
@@ -31,22 +34,9 @@ Publishers
 
 // Combine Comparison : 5
 // Combine Comparison Finish
-```
 
-상위 Publishers는 1, 3, 2, 5의 값을 차례대로 내며, 다음과 같이 동작한다.
-
-`$0 > $1`은 조건을 오름차순으로 설정한다.
-
-1. 1의 값을 내며, 첫 번째로 발행된 요소이므로 넘어간다.
-2. 3의 값을 내며, 3 > 1이 true이므로 3을 발행한다.
-3. 2의 값을 내며, 2 > 3이 false이므로 3을 발행한다.
-4. 5의 값을 내며, 5 > 3이 true이므로 5를 발행한다.
-
-최종적으로 5의 값을 낸다.
-
-```swift
-// 1 : max Operator
-Publishers.Sequence<[Int], Never>(sequence: [1, 3, 2, 4])
+// max Operator
+Publishers.Sequence<[Int], Never>(sequence: [1, 3, 2, 5])
   .max()
   .sink(receiveCompletion: { completion in
     switch completion {
@@ -60,11 +50,11 @@ Publishers.Sequence<[Int], Never>(sequence: [1, 3, 2, 4])
   })
   .store(in: &cancellables)
 
-// Combine Comparison : 4
+// Combine Comparison : 5
 // Combine Comparison Finish
 
-// 2 : min Operator
-Publishers.Sequence<[Int], Never>(sequence: [1, 3, 2, 4])
+// min Operator
+Publishers.Sequence<[Int], Never>(sequence: [1, 3, 2, 5])
   .min()
   .sink(receiveCompletion: { completion in
     switch completion {
@@ -82,15 +72,26 @@ Publishers.Sequence<[Int], Never>(sequence: [1, 3, 2, 4])
 // Combine Comparison Finish
 ```
 
-`max` 및 `min` 오퍼레이터는 말 그대로 상위 Publisher가 종료할 때까지 내어진 값들 중 최대 / 최소 값을 반환한다.
+상위 Publishers는 1, 3, 2, 5의 값을 차례대로 내며, 다음과 같이 동작한다.
+
+`$0 > $1`은 조건을 오름차순으로 설정한다.
+
+1. 1의 값을 내며, 첫 번째로 발행된 요소이므로 넘어간다.
+2. 3의 값을 내며, 3 > 1이 true이므로 3을 발행한다.
+3. 2의 값을 내며, 2 > 3이 false이므로 3을 발행한다.
+4. 5의 값을 내며, 5 > 3이 true이므로 5를 발행한다.
+
+최종적으로 5의 값을 낸다.
+
+`max(_:)` 및 `min(_:)` 오퍼레이터는 말 그대로 상위 Publisher가 종료할 때까지 내어진 값들 중 최대 / 최소 값을 반환한다.
 
 ## RxSwift
 
-RxSwift는 해당 기능을 구현하기 위한 오퍼레이터를 제공하지 않는다.
+해당 기능을 구현하기 위한 오퍼레이터를 제공하지 않는다.
 
 ## ReactiveSwift
 
-ReactiveSwift는 해당 기능을 구현하기 위한 오퍼레이터를 제공하지 않는다.
+해당 기능을 구현하기 위한 오퍼레이터를 제공하지 않는다.
 
 ## 참고
 

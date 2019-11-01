@@ -2,17 +2,19 @@
 
 **제네릭 구조체** | 실패하는 Publisher를 다른 Publisher로 교체하여 상위에 흐르는 Publisher로부터 에러를 처리하는 Publisher
 
-상위 Publisher가 에러를 내는 경우 에러를 내며 종료하는 대신 다른 Publisher로 대체한다.
-
 이니셜라이저는 두 개의 인자를 받는다.
 
-- `upstream` : `Publisher` 프로토콜을 따르는 Publisher를 넘겨준다.
-- `handler` : 상위에 흐르는 Publisher가 에러를 내는 경우 새로운 Publisher를 만드는 클로저를 정의한다. 상위에 흐르는 Publisher의 Output 타입과 새로운 Publisher의 Output 타입은 동일해야 한다.
+- `upstream` : 상위에 흐르는 Publisher
+- `handler` : 상위에 흐르는 Publisher가 에러를 내는 경우 새로운 Publisher를 만드는 클로저
 
-`catch` 오퍼레이터는 해당 Publisher를 반환한다.
+상위에 흐르는 Publisher와 새로운 Publisher의 Output 타입은 동일해야 한다.
+
+상위 Publisher가 에러를 내는 경우 에러를 내며 종료하는 대신 다른 Publisher로 대체한다.
+
+`catch` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.Catch Publisher
+// Publishers.Catch Publisher
 Publishers.Catch(upstream: Fail(error: error)) { _ in Just("Error") }
   .sink(receiveCompletion: { completion in
     switch completion {
@@ -26,7 +28,7 @@ Publishers.Catch(upstream: Fail(error: error)) { _ in Just("Error") }
   })
   .store(in: &cancellables)
 
-// 2 : catch Operator
+// catch Operator
 Fail(error: error)
   .catch { _ in Just("Error") }
   .sink(receiveCompletion: { completion in
@@ -49,7 +51,7 @@ Fail(error: error)
 
 ## RxSwift
 
-Observable 오류 처리 오퍼레이터 `catchError`를 사용하여 구현할 수 있다. 
+`catchError` 오퍼레이터를 사용하여 구현할 수 있다. 
 
 ```swift
 Observable.error(error)
@@ -67,11 +69,9 @@ Observable.error(error)
 // RxSwift Catch Finish
 ```
 
-에러를 내는 Observable을 만든 후, `catchError` 오퍼레이터를 사용하여 다른 Observable로 대체한다.
-
 ## ReactiveSwift
 
-`flatMapError` 오퍼레이터를 사용하여 클로저에 대체할 SignalProducer를 만드는 코드를 작성하여 구현할 수 있다.
+`flatMapError` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 SignalProducer(error: error)
@@ -92,8 +92,6 @@ SignalProducer(error: error)
 // ReactiveSwift Catch : Error
 // ReactiveSwift Catch Finish
 ```
-
-다른 SignalProducer를 만드는 클로저에서 `init(value:)`를 사용하여 다른 예제 코드와 같은 동작을 구현할 수 있다.
 
 ## 참고
 

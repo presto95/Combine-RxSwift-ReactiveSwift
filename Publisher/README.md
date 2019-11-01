@@ -17,11 +17,23 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 
 `Publisher` 프로토콜의 익스텐션으로 여러 오퍼레이터*operator*가 정의되어 있으며, 이를 사용해서 이벤트 처리 체인을 구성할 수 있다.
 
-각 오퍼레이터는 `Publisher` 프로토콜을 구현하는 타입을 반환하며, 대부분은 `Publishers` 열거형의 익스텐션에 구현된 중첩 타입이다. 예를 들어 `map(_:)` 오퍼레이터는 `Publishers.Map` 구조체를 반환한다. 
+각 오퍼레이터는 `Publisher` 프로토콜을 구현하는 타입을 반환한다.
 
-오퍼레이터의 이름과 Publisher의 이름이 항상 동일한 것은 아니며, 오퍼레이터는 그 이름과 비슷한 이름을 가진 Publisher를 항상 반환한다고 말할 수 없다.
+기본적으로 `Publisher` 프로토콜은 오퍼레이터의 이름과 그것이 반환하는 Publisher의 이름을 비슷하게 만들어 두었으나, 이 프로토콜을 채택하는 개별 Publisher는 오퍼레이터가 다른 타입의 Publisher를 반환하게 구현해둘 수 있다. 
 
-예를 들어 오퍼레이터 수행 결과가 시퀀스 형태로 나오는 경우 `Publishers.Sequence`, 결과가 있을 수도 있고 없을 수도 있는 경우 `Optional.Publisher`, 결과가 성공 또는 실패 정보를 담는다면 `Result.Publisher` 등의 Publisher를 반환할 수 있다.
+```swift
+protocol Publisher { }
+
+extension Publisher {
+  func count() -> Publishers.Count<Self>
+}
+
+struct Just: Publisher {
+  func count() -> Just<Int>
+}
+```
+
+`Publisher` 프로토콜의 익스텐션으로 여러 오퍼레이터가 구현되어 있으나, `Just`와 같은 개별 Publisher가 오퍼레이터를 오버로딩하여 다른 타입을 반환하도록 구현한 경우를 어렵지 않게 찾아볼 수 있다.
 
 ## RxSwift
 
@@ -45,12 +57,12 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 
 |Publisher|관련 Operator|
 |---|---|
-|[Future](./Future.md)|X|
-|[Just](./Just.md)|X|
-|[Deferred](./Deferred.md)|X|
-|[Empty](./Empty.md)|`ignoreOutput()`|
-|[Fail](./Fail.md)|X|
-|Record|X|
+|[Future](./Future.md)|-|
+|[Just](./Just.md)|-|
+|[Deferred](./Deferred.md)|-|
+|[Empty](./Empty.md)|-|
+|[Fail](./Fail.md)|-|
+|Record|-|
 
 ### Publisher in Publishers Enum
 
@@ -58,7 +70,7 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 
 |Publisher|관련 Operator|
 |---|---|
-|[Sequence](./Sequence.md)|`append(_:)` / `prepend(_:)` / `drop(while:)` / `prefix(while:)` / `prefix(_:)` / `output(in:)`|
+|[Sequence](./Sequence.md)|-|
 |[Catch](./Catch.md)|`catch(_:)`|
 
 #### Working with Subscribers
@@ -98,8 +110,8 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 |Publisher|관련 Operator|
 |---|---|
 |[Collect](./Collect.md)|`collect()`|
-|CollectByCount|`collect(_:)`|
-|CollectByTime|`collect(_:options:)`|
+|[CollectByCount](./CollectByCount.md)|`collect(_:)`|
+|[CollectByTime](./CollectByTime.md)|`collect(_:options:)`|
 |[IgnoreOutput](./IgnoreOutput.md)|`ignoreOutput()`|
 |[Reduce](./Reduce)|`reduce(_:_:)`|
 |[TryReduce](./TryReduce.md)|`tryReduce(_:_:)`|
@@ -244,7 +256,7 @@ Combine에서 `Publisher`는 프로토콜로 정의되어 있으며, 다음의 �
 | Publisher | 관련 Operator |
 | --------- | ------------- |
 |[AnyPublisher](./AnyPublisher.md)|`eraseToAnyPublisher()`|
-|NotificationCenter.Publisher|X|
-|[Optional.Publisher](./Optional.Publisher.md)|`first()` / `last()` / `first(where:)` / `last(where:)` / `dropFirst()` / `output(at:)`|
-|[Result.Publisher](./Result.Publisher.md)|`count()` / `contains(_:)` / `contains(where:)` / `tryContains(where:)`|
-|[URLSession.DataTaskPublisher](./URLSession.DataTaskPublisher.md)|X|
+|NotificationCenter.Publisher|-|
+|[Optional.Publisher](./Optional.Publisher.md)|-|
+|[Result.Publisher](./Result.Publisher.md)|-|
+|[URLSession.DataTaskPublisher](./URLSession.DataTaskPublisher.md)|-|

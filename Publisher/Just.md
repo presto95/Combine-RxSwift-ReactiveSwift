@@ -20,7 +20,7 @@ Just("Combine Just")
 
 ## RxSwift
 
-Observable 생성 오퍼레이터 `just`를 사용하여 구현할 수 있다.
+`just` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 Observable.just("RxSwift Just")

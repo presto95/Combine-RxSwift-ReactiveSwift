@@ -13,11 +13,11 @@
 
 테스트 중에는 활성화되나 실제 코드의 성능에는 영향을 미치지 않는 내부 검사를 하기 위해 사용할 수 있다.
 
-`assertNoFailure` 오퍼레이터는 해당 Publisher를 반환한다.
+`assertNoFailure` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.AssertNoFailure Publisher
-Publishers.AssertNoFailure(upstream: Fail<Void, Error>(error: NSError(domain: "", code: 0, userInfo: nil)), prefix: "prefix", file: #file, line: #line)
+// Publishers.AssertNoFailure Publisher
+Publishers.AssertNoFailure(upstream: Fail<Void, Error>(error: error), prefix: "prefix", file: #file, line: #line)
   .sink(receiveCompletion: { completion in
     switch completion {
     case .failure:
@@ -30,8 +30,8 @@ Publishers.AssertNoFailure(upstream: Fail<Void, Error>(error: NSError(domain: ""
   })
   .store(in: &cancellables)
 
-// 2 : assertNoFailure Operator
-Fail<Void, Error>(error: NSError(domain: "", code: 0, userInfo: nil))
+// assertNoFailure Operator
+Fail<Void, Error>(error: error)
   .assertNoFailure()
   .sink(receiveCompletion: { completion in
     switch completion {
@@ -52,8 +52,8 @@ Fail<Void, Error>(error: NSError(domain: "", code: 0, userInfo: nil))
 
 ## RxSwift
 
-RxSwift는 해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
+해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
 
 ## ReactiveSwift
 
-ReactiveSwift는 해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
+해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.

@@ -2,19 +2,19 @@
 
 **제네릭 구조체** | 전달받은 모든 요소가 주어진 조건을 통과하는지를 나타내는 하나의 불리언 값을 발행하는 Publisher
 
-상위 Publisher가 내는 모든 값들이 주어진 조건을 통과하는지를 나타내는 불리언 값을 반환한다.
-
 이니셜라이저는 두 개의 인자를 받는다.
 
 - `upstream` : 상위에 흐르는 Publisher
 - `predicate` : 각각의 전달받은 요소를 평가하는 클로저
 
-값들이 주어진 조건을 모두 만족하는지 알기 위해 사용할 수 있다.
+상위 Publisher가 내는 모든 값들이 주어진 조건을 통과하는지를 나타내는 불리언 값을 반환한다.
 
-`allSatisfy` 오퍼레이터는 해당 Publisher를 반환한다.
+모든 값들이 주어진 조건을 만족하는지 알기 위해 사용할 수 있다.
+
+`allSatisfy` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.AllSatisfy Publisher
+// Publishers.AllSatisfy Publisher
 Publishers
   .AllSatisfy(upstream: Publishers.Sequence<[Int], Never>(sequence: [2, 4, 7])) { $0.isMultiple(of: 2) }
   .sink(receiveCompletion: { completion in
@@ -29,7 +29,7 @@ Publishers
   })
   .store(in: &cancellables)
 
-// 2 : allSatisfy Operator
+// allSatisfy Operator
 Publishers.Sequence<[Int], Never>(sequence: [2, 4, 7])
   .allSatisfy { $0.isMultiple(of: 2) }
   .sink(receiveCompletion: { completion in
@@ -56,11 +56,11 @@ Publishers.Sequence<[Int], Never>(sequence: [2, 4, 7])
 
 ## RxSwift
 
-RxSwift는 해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
+해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
 
 ## ReactiveSwift
 
-ReactiveSwift는 해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
+해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
 
 ## 참고
 

@@ -9,13 +9,10 @@
 
 `predicate`에 넘겨진 클로저를 통과하는 요소가 있다면 true를 반환하고 그렇지 않으면 false를 반환한다.
 
-`contains(where:)` 오퍼레이터는 다음의 Publisher를 반환한다.
-
-- 성공 여부를 담아 `Result.Publisher` Publisher를 반환한다.
-- 해당 Publisher를 반환한다.
+`contains` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.ContainsWhere Publisher
+// Publishers.ContainsWhere Publisher
 Publishers
   .ContainsWhere(upstream: Publishers.Sequence<[Int], Never>(sequence: [2, 4, 6])) { $0 == 5 }
   .sink(receiveCompletion: { completion in
@@ -30,7 +27,7 @@ Publishers
   })
   .store(in: &cancellables)
 
-// 2 : contains(where:) Operator
+// contains Operator
 Publishers.Sequence<[Int], Never>(sequence: [2, 4, 6])
   .contains { $0 == 5 }
   .sink(receiveCompletion: { completion in
@@ -55,11 +52,11 @@ Publishers.Sequence<[Int], Never>(sequence: [2, 4, 6])
 
 ## RxSwift
 
-RxSwift는 해당 기능을 구현하기 위한 오퍼레이터를 제공하지 않는다.
+해당 기능을 구현하기 위한 오퍼레이터를 제공하지 않는다.
 
 ## ReactiveSwift
 
-ReactiveSwift는 해당 기능을 구현하기 위한 오퍼레이터를 제공하지 않는다.
+해당 기능을 구현하기 위한 오퍼레이터를 제공하지 않는다.
 
 ## 참고
 

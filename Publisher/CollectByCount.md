@@ -13,12 +13,12 @@
 
 요소의 최대 개수를 채우지 못하고 종료하면 배열의 형태로 기억된 값을 한꺼번에 낸 후 종료한다.
 
-`collect(_:)` 오퍼레이터는 해당 Publisher를 반환한다.
+`collect` 오퍼레이터와 관련이 있다.
 
 ```swift
 let subject = PassthroughSubject<Int, Never>()
 
-// 1 : Publishers.CollectByCount Publisher
+// Publishers.CollectByCount Publisher
 Publishers.CollectByCount(upstream: subject, count: 2)
   .sink(receiveCompletion: { completion in
     switch completion {
@@ -32,7 +32,7 @@ Publishers.CollectByCount(upstream: subject, count: 2)
   })
   .store(in: &cancellables)
 
-// 2 : collect(_:) Operator
+// collect Operator
 subject
   .collect(2)
   .sink(receiveCompletion: { completion in
@@ -47,17 +47,17 @@ subject
   })
   .store(in: &cancellables)
 
-// 3
+// 1
 subject.send(1)
-// 4
+// 2
 subject.send(2)
-// 5
+// 3
 subject.send(3)
-// 6
+// 4
 subject.send(4)
-// 7
+// 5
 subject.send(5)
-// 8 
+// 6 
 subject.send(completion: .finished)
 
 // Combine CollectByCount : [1, 2]
@@ -70,16 +70,16 @@ subject.send(completion: .finished)
 
 코드는 다음과 같이 동작한다.
 
-1. 3의 코드에 의해 `subject`에 1의 값을 전달한다. 이 값은 기억되고, 최대 개수를 채우지 못했으므로 값을 발행하지 않는다.
-2. 4의 코드에 의해 `subject`에 2의 값을 전달한다. 이 값은 기억되고, 최대 개수를 채웠으므로 [1, 2]의 값을 발행한다.
-3. 5의 코드에 의해 `subject`에 3의 값을 전달한다. 이 값은 기억되고, 최대 개수를 채우지 못했으므로 값을 발행하지 않는다.
-4. 6의 코드에 의해 `subject`에 4의 값을 전달한다. 이 값은 기억되고, 최대 개수를 채웠으므로 [3, 4]의 값을 발행한다.
-5. 7의 코드에 의해 `subject`에 5의 값을 전달한다. 이 값을 기억되고, 최대 개수를 채우지 못했으므로 값을 발행하지 않는다.
-6. 8의 코드에 의해 `subject`에 종료를 전달한다. 버퍼에 기억된 5의 값을 배열의 형태로 만들어 [5]의 값을 발행하고 종료한다.
+1. 1의 코드에 의해 `subject`에 1의 값을 전달한다. 이 값은 기억되고, 최대 개수를 채우지 못했으므로 값을 발행하지 않는다.
+2. 2의 코드에 의해 `subject`에 2의 값을 전달한다. 이 값은 기억되고, 최대 개수를 채웠으므로 [1, 2]의 값을 발행한다.
+3. 3의 코드에 의해 `subject`에 3의 값을 전달한다. 이 값은 기억되고, 최대 개수를 채우지 못했으므로 값을 발행하지 않는다.
+4. 4의 코드에 의해 `subject`에 4의 값을 전달한다. 이 값은 기억되고, 최대 개수를 채웠으므로 [3, 4]의 값을 발행한다.
+5. 5의 코드에 의해 `subject`에 5의 값을 전달한다. 이 값을 기억되고, 최대 개수를 채우지 못했으므로 값을 발행하지 않는다.
+6. 6의 코드에 의해 `subject`에 종료를 전달한다. 버퍼에 기억된 5의 값을 배열의 형태로 만들어 [5]의 값을 발행하고 종료한다.
 
 ## RxSwift
 
-Observable 변환 오퍼레이터 `buffer`를 사용하여 구현할 수 있다.
+`buffer` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 let subject = PublishSubject<Int>()
@@ -110,7 +110,7 @@ subject.onCompleted()
 
 ## ReactiveSwift
 
-`collect(count:)` 오퍼레이터를 사용하여 구현할 수 있다.
+`collect` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 let property = MutableProperty<Int>(0)

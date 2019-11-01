@@ -13,10 +13,10 @@
 - `byTime` : 특정 시간 동안 요소를 모으고 발행함
 - `byTimeOrCount` : 특정 시간 동안 요소를 모으고 발행하거나, 버퍼가 최대 크기에 도달하면 발행함
 
-`collect(_:options:)` 오퍼레이터는 해당 Publisher를 반환한다.
+`collect` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.CollectByTime Publisher
+// Publishers.CollectByTime Publisher
 let subject = PassthroughSubject<Int, Never>()
 
 Publishers.CollectByTime(upstream: subject, strategy: .byTimeOrCount(DispatchQueue.main, 1, 2), options: nil)
@@ -32,7 +32,7 @@ Publishers.CollectByTime(upstream: subject, strategy: .byTimeOrCount(DispatchQue
   })
   .store(in: &cancellables)
 
-// 2: collect(_:options:) Operator
+// collect Operator
 subject
   .collect(.byTimeOrCount(DispatchQueue.main, 1, 2))
   .sink(receiveCompletion: { completion in
@@ -54,7 +54,7 @@ subject
 
 ## RxSwift
 
-Observable 변환 오퍼레이터 `buffer`를 사용하여 구현할 수 있다.
+`buffer` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 let subject = PublishSubject<Int>()
@@ -73,7 +73,7 @@ subject
 
 ## ReactiveSwift
 
-`collect(every:on:skipEmpty:discardWhenCompleted:)` 오퍼레이터를 사용하여 구현할 수 있다.
+`collect` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 let property = MutableProperty<Int>(0)

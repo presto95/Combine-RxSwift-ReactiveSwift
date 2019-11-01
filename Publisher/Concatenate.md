@@ -7,14 +7,11 @@
 - `prefix` : `suffix`가 요소를 다시 발행하기 이전에 모든 요소를 다시 발행하는 Publisher
 - `suffix` : `prefix` Publisher가 종료한 직후 다시 발행하는 Publisher
 
-`prefix` Publisher와 `suffix` Publisher의 Output 타입은 동일해야 한다.
+`prefix` Publisher와 `suffix` Publisher의 Output 타입과 에러 타입은 동일해야 한다.
 
 Publisher를 이어 붙이거나 요소를 추가할 때 사용할 수 있다.
 
-`append` 및 `prepend` 오퍼레이터는 다음의 Publisher를 반환한다. 
-
-- 인자에 가변 인자나 시퀀스를 넘겼을 경우 `Publishers.Sequence` Publisher를 반환한다.
-- 인자에 Publisher를 넘겼을 경우 해당 Publisher를 반환한다.
+`append` 및 `prepend` 오퍼레이터와 관련이 있다.
 
 `append` 오퍼레이터는 다음의 형태를 갖는다.
 
@@ -44,7 +41,7 @@ Publishers
   })
   .store(in: &cancellables)
 
-// 2 : append Operator
+// append Operator
 Just(1)
   .append(Just(2))
   .sink(receiveCompletion: { completion in
@@ -63,7 +60,7 @@ Just(1)
 // Combine Concatenate : 2
 // Combine Concatenate Finish
 
-// 3 : prepend Operator
+// prepend Operator
 Just(1)
   .prepend(Just(2))
   .sink(receiveCompletion: { completion in
@@ -89,11 +86,28 @@ Just(1)
 
 ## RxSwift
 
-`append` 오퍼레이터의 기능을 할 수 있는 오퍼레이터는 제공하지 않는다.
+`concat` 오퍼레이터를 사용하여 `append` 오퍼레이터의 기능을 구현할 수 있다.
 
-Observable 결합 오퍼레이터 `startWith`를 사용하여 `prepend` 오퍼레이터의 기능을 구현할 수 있다.
+`startWith` 오퍼레이터를 사용하여 `prepend` 오퍼레이터의 기능을 구현할 수 있다.
 
 ```swift
+// concat Operator
+Observable.just(1)
+  .concat(Observable.just(2))
+  .subscribe(onNext: { value in
+    print("RxSwift Concatenate : \(value)")
+  }, onError: { _ in
+    print("RxSwift Concatenate Error")
+  }, onCompleted: {
+    print("RxSwift Concatenate Finish")
+  })
+  .disposed(by: disposeBag)
+
+// RxSwift Concatenate : 1
+// RxSwift Concatenate : 2
+// RxSwift Concatenate Finish
+
+// startWith Operator
 Observable.just(1)
   .startWith(2)
   .subscribe(onNext: { value in
@@ -112,14 +126,12 @@ Observable.just(1)
 
 ## ReactiveSwift
 
-`concat` 오퍼레이터를 사용하여 `append`의 동작을 구현할 수 있다.
+`concat` 오퍼레이터를 사용하여 `append` 오퍼레이터의 기능을 구현할 수 있다.
 
-`prefix` 오퍼레이터를 사용하여 `prepend`의 동작을 구현할 수 있다.
-
-상위 Signal의 Element 타입의 가변 인자를 이어 붙일 수도 있고, Signal을 이어 붙일 수도 있고, 에러를 이어 붙일 수도 있다.
+`prefix` 오퍼레이터를 사용하여 `prepend` 오퍼레이터의 기능을 구현할 수 있다.
 
 ```swift
-// 1 : concat Operator
+// concat Operator
 SignalProducer(value: 1)
   .concat(value: 2)
   .start { event in
@@ -139,7 +151,7 @@ SignalProducer(value: 1)
 // ReactiveSwift Concatenate : 2
 // ReactiveSwift Concatenate Finish
 
-// 2 : prefix Operator
+// prefix Operator
 SignalProducer(value: 1)
   .prefix(value: 2)
   .start { event in
@@ -159,3 +171,8 @@ SignalProducer(value: 1)
 // ReactiveSwift Concatenate : 1
 // ReactiveSwift Concatenate Finish
 ```
+
+## 참고
+
+[ReactiveX - Operators - StartWith](http://reactivex.io/documentation/operators/startwith.html)
+

@@ -9,13 +9,13 @@
 
 `other`에서 요소가 처음으로 발행되기 전까지는 `upstream`에서 발행하는 요소를 무시한다.
 
-`drop(untilOutputFrom:)` 오퍼레이터는 해당 Publisher를 반환한다.
+`drop` 오퍼레이터와 관련이 있다.
 
 ```swift
-let sourceSubject = PassthroughSubject<Void, Never>()
-let otherSubject = PassthroughSubject<Void, Never>()
+let sourceSubject = PassthroughSubject<Int, Never>()
+let otherSubject = PassthroughSubject<Int, Never>()
 
-// 1 : Publishers.DropUntilOutput Publisher
+// Publishers.DropUntilOutput Publisher
 Publishers
   .DropUntilOutput(upstream: sourceSubject, other: otherSubject)
   .sink(receiveCompletion: { completion in
@@ -25,12 +25,12 @@ Publishers
     case .finished:
       print("Combine DropUntilOutput Finish")
     }
-  }, receiveValue: {
-    print("Combine DropUntilOutput")
+  }, receiveValue: { value in
+    print("Combine DropUntilOutput : \(value)")
   })
   .store(in: &cancellables)
 
-// 2 : drop(untilOutputFrom:) Operator
+// drop Operator
 sourceSubject
   .drop(untilOutputFrom: otherSubject)
   .sink(receiveCompletion: { completion in
@@ -40,40 +40,40 @@ sourceSubject
     case .finished:
       print("Combine DropUntilOutput Finish")
     }
-  }, receiveValue: {
-    print("Combine DropUntilOutput")
+  }, receiveValue: { value in
+    print("Combine DropUntilOutput : \(value)")
   })
   .store(in: &cancellables)
 
+// 1
+sourceSubject.send(1)
+// 2
+otherSubject.send(2)
 // 3
-sourceSubject.send(Void())
-// 4
-otherSubject.send(Void())
-// 5
-sourceSubject.send(Void())
+sourceSubject.send(3)
 
-// Combine DropUntilOutput
+// Combine DropUntilOutput : 3
 ```
 
-3의 코드를 실행하면 `sourceSubject` Subject에 값을 전달하지만, `otherSubject`가 요소를 발행한 적이 없으므로 전달된 값을 무시한다.
+다음과 같은 순서로 코드가 동작한다.
 
-4의 코드를 실행하면 `otherSubject` Subject에 값을 전달한다.
-
-5의 코드를 실행하면 `sourceSubject` Subject에 값을 전달하며, `otherSubject`가 요소를 발행한 적이 있으므로 전달된 값을 발행한다.
+1. 1의 코드를 실행하면 `sourceSubject` Subject에 1의 값을 전달하지만, `otherSubject`가 요소를 발행한 적이 없으므로 전달된 값을 무시한다.
+2. 2의 코드를 실행하면 `otherSubject` Subject에 2의 값을 전달한다.
+3. 3의 코드를 실행하면 `sourceSubject` Subject에 3의 값을 전달하며, `otherSubject`가 요소를 발행한 적이 있으므로 전달된 값을 발행한다.
 
 결과적으로 값을 전달받을 때 수행할 클로저를 실행한다.
 
 ## RxSwift
 
-Observable 필터링 오퍼레이터 `skipUntil`을 사용하여 구현할 수 있다.
+`skipUntil` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
-let sourceSubject = PublishSubject<Void>()
-let otherSubject = PublishSubject<Void>()
+let sourceSubject = PublishSubject<Int>()
+let otherSubject = PublishSubject<Int>()
 
 sourceSubject.skipUntil(otherSubject)
-  .subscribe(onNext: {
-    print("RxSwift DropUntilOutput")
+  .subscribe(onNext: { value in
+    print("RxSwift DropUntilOutput : \(value)")
   }, onError: { _ in
     print("RxSwift DropUntilOutput Error")
   }, onCompleted: {
@@ -81,27 +81,27 @@ sourceSubject.skipUntil(otherSubject)
   })
   .disposed(by: disposeBag)
 
-sourceSubject.onNext(Void())
-otherSubject.onNext(Void())
-sourceSubject.onNext(Void())
+sourceSubject.onNext(1)
+otherSubject.onNext(2)
+sourceSubject.onNext(3)
 
-// RxSwift DropUntilOutput
+// RxSwift DropUntilOutput : 3
 ```
 
 ## ReactiveSwift
 
-`skip(until:)` 오퍼레이터를 사용하여 구현할 수 있다.
+`skip` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
-let sourceProperty = MutableProperty(Void())
-let otherProperty = MutableProperty(Void())
+let sourceProperty = MutableProperty(0)
+let otherProperty = MutableProperty(0)
 
 sourceProperty.signal
   .skip(until: otherProperty.signal)
   .observe { event in
     switch event {
-    case .value:
-      print("ReactiveSwift DropUntilOutput")
+    case let .value(value):
+      print("ReactiveSwift DropUntilOutput : \(value)")
     case .failed:
       print("ReactiveSwift DropUntilOutput Error")
     case .completed:
@@ -111,11 +111,11 @@ sourceProperty.signal
     }
   }
 
-sourceProperty.value = Void()
-otherProperty.value = Void()
-sourceProperty.value = Void()
+sourceProperty.value = 1
+otherProperty.value = 2
+sourceProperty.value = 3
 
-// ReactiveSwift DropUntilOutput
+// ReactiveSwift DropUntilOutput : 3
 // ReactiveSwift DropUntilOutput Finish
 ```
 
