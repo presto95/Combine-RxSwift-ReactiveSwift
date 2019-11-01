@@ -15,14 +15,14 @@
 값을 전달하고 싶지 않으며, 즉시 종료하거나 종료하지 않는 Publisher를 만들고 싶을 때 사용한다.
 
 ```swift
-// 1
+// completeImmediately: true
 Empty<Void, Never>()
   .sink(receiveCompletion: { _ in print("Combine Empty Finish") }, receiveValue: { })
   .store(in: &cancellables)
 
 // Combine Empty Finish
 
-// 2
+// completeImmediately: false
 Empty<Void, Never>(completeImmediately: false)
   .sink(receiveCompletion: { _ in print("Combine Never Finish") }, receiveValue: { })
   .store(in: &cancellables)
@@ -38,61 +38,47 @@ Emtpy는 값을 내지 않으므로 `receiveValue` 클로저에서는 동작을 
 
 ## RxSwift
 
-Observable 생성 오퍼레이터 `empty`와 `never`를 사용하여 구현할 수 있다.
+`empty` 및 `never` 오퍼레이터를 사용하여 구현할 수 있다.
 
-`empty`의 경우 Combine의 `Empty(completeImmediately: true)`의 동작과 같다.
-
-`never`의 경우 Combine의 `Empty(completeImmediately: false)`의 동작과 같다.
+- `empty` 오퍼레이터는 `Empty(completeImmediately: true)`의 동작과 같다.
+- `never` 오퍼레이터는 `Empty(completeImmediately: false)`의 동작과 같다.
 
 ```swift
-// 1
+// empty Operator
 Observable<Void>.empty()
-  .subscribe(onNext: nil, onCompleted: { print("RxSwift Empty Finish") })
+  .subscribe(onCompleted: { print("RxSwift Empty Finish") })
   .disposed(by: disposeBag)
 
 // RxSwift Empty Finish
 
-// 2
+// never Operator
 Observable<Void>.never()
-  .subscribe(onNext: nil, onCompleted: { print("RxSwift Never Finish" )})
+  .subscribe(onCompleted: { print("RxSwift Never Finish" )})
   .disposed(by: disposeBag)
 
 // 아무것도 출력되지 않음
 ```
 
-Combine과 같이 값을 내지 않으므로 `onNext` 클로저에서는 동작을 확인할 수 없고, `onCompleted` 클로저에서 종료하는 동작을 확인할 수 있다.
-
-1번 코드의 경우 Observable이 바로 종료하여 `onCompleted`에 등록한 클로저가 실행되는 것을 확인할 수 있다.
-
-2번 코드의 경우 Observable이 종료하지 않으므로 아무런 출력도 확인할 수 없다.
-
 ## ReactiveSwift
 
-`SignalProducer`의 타입 저장 프로퍼티인 `empty`와 `never`를 사용하여 구현할 수 있다.
+`empty` 및 `never` 오퍼레이터를 사용하여 구현할 수 있다.
 
-`empty`의 경우 Combine의 `Empty(completeImmediately: true)`의 동작과 같다.
-
-`never`의 경우 Combine의 `Empty(completeImmediately: false)`의 동작과 같다.
+- `empty` 오퍼레이터는 `Empty(completeImmediately: true)`의 동작과 같다.
+- `never` 오퍼레이터는 `Empty(completeImmediately: false)`의 동작과 같다.
 
 ```swift
-// 1
+// empty Operator
 SignalProducer<Void, Never>.empty
   .startWithCompleted { print("ReactiveSwift Empty Finish") }
 
 // ReactiveSwift Empty Finish
 
-// 2
+// never Operator
 SignalProducer<Void, Never>.never
   .startWithCompleted { print("ReactiveSwift Never Finish") }
-
+ㄹ6 ㄱ5ㅇㄷ4ㄴㅈ333ㅇㄷ4ㅈ2
 // 아무것도 출력되지 않음
 ```
-
-Combine과 같이 값을 내지 않으므로 `startWithValues` 메소드를 사용하면 동작을 확인할 수 없고, `startWithCompleted` 메소드를 사용하여 종료하는 동작을 확인할 수 있다.
-
-1번 코드의 경우 Signal이 바로 종료하여 등록한 클로저가 실행되는 것을 확인할 수 있다.
-
-2번 코드의 경우 Signal이 종료하지 않으므로 아무런 출력도 확인할 수 없다.
 
 ## 참고
 

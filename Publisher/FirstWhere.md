@@ -9,13 +9,10 @@
 
 상위 Publisher로부터 조건 클로저에 만족하는 요소를 먼저 뽑아내고, 그 중에서 첫 번째 요소만을 발행한다.
 
-`first(where:)` 오퍼레이터는 다음의 Publisher를 반환한다.
-
-- 상위 Publisher의 에러 타입이 Never인 경우 `Optional.Publisher` Publisher를 반환한다.
-- 해당 Publisher를 반환한다.
+`first` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.FirstWhere Publisher
+// Publishers.FirstWhere Publisher
 Publishers
   .FirstWhere(upstream: Publishers.Sequence<[Int], Never>(sequence: [1, 2, 3, 4, 5])) { $0.isMultiple(of: 2) }
   .sink(receiveCompletion: { completion in
@@ -30,7 +27,7 @@ Publishers
   })
   .store(in: &cancellables)
 
-// 2 : first(where:) Operator
+// first Operator
 Publishers.Sequence<[Int], Never>(sequence: [1, 2, 3, 4, 5])
   .first { $0.isMultiple(of: 2) }
   .sink(receiveCompletion: { completion in
@@ -55,8 +52,8 @@ Publishers.Sequence<[Int], Never>(sequence: [1, 2, 3, 4, 5])
 
 ## RxSwift
 
-RxSwift는 해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
+해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
 
 ## ReactiveSwift
 
-ReactiveSwift는 해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
+해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.

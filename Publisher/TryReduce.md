@@ -10,17 +10,17 @@
 
 상위 Publisher에 흐르는 모든 값을 모아 어떠한 하나의 값을 내고 싶으며 해당 작업이 에러를 낼 수 있을 때 사용할 수 있다.
 
-`tryReduce` 오퍼레이터는 해당 Publisher를 반환한다.
+`tryReduce` 오퍼레이터와 관련이 있다.
 
 `Publishers.Reduce`의 동작과 같으나 동작을 수행하다가 에러를 낼 수 있다는 차이가 있다.
 
 ## RxSwift
 
-Observable 수학 및 집계 오퍼레이터 `reduce`를 사용하여 구현할 수 있다.
+`reduce` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ## ReactiveSwift
 
-ReactiveSwift는 `reduce`의 동작을 수행할 때 에러를 던질 수 있는 방법을 제공하지 않는다.
+해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
 
 ## 참고
 

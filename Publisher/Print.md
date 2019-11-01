@@ -2,28 +2,28 @@
 
 **제네릭 구조체** | 발행하는 모든 이벤트에 대하여, 선택적으로 접두사를 붙일 수 있는 로그 메세지를 출력하는 Publisher
 
-이벤트에 대하여 로그 메세지를 출력한다.
-
-다음의 이벤트를 전달받으면 로그 메세지를 출력한다.
-
-- 구독
-- 값
-- 정상 종료
-- 실패
-- 취소
-
 이니셜라이저는 세 개의 인자를 받는다.
 
 - `upstream` : 상위에 흐르는 Publisher
 - `prefix` : 로그 메세지의 앞에 붙일 문자열
 - `to` : 텍스트를 출력할 곳. nil이면 표준 출력으로 출력한다.
 
+이벤트에 대하여 로그 메세지를 출력한다.
+
+다음의 이벤트를 전달받으면 로그 메세지를 출력한다.
+
+- 구독*Subscription*
+- 값*Value*
+- 정상 종료*Normal Completion*
+- 실패*Failure*
+- 취소*Cancellation*
+
 매 오퍼레이터 실행 후 Publisher의 상태를 확인하는 등 디버깅 과정에서 유용하게 사용할 수 있다.
 
-`print` 오퍼레이터는 해당 Publisher를 반환한다.
+`print` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.Print Publisher
+// Publishers.Print Publisher
 Publishers
   .Print(upstream: Just(Void()), prefix: "")
   .sink(receiveCompletion: { completion in
@@ -38,7 +38,7 @@ Publishers
   })
   .store(in: &cancellables)
 
-// 2 : print Operator
+// print Operator
 Just(Void())
   .print()
   .sink(receiveCompletion: { completion in

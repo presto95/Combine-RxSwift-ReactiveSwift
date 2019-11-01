@@ -2,7 +2,11 @@
 
 **제네릭 구조체** | 요소의 주어진 시퀀스를 발행하는 Publisher
 
-이니셜라이저의 `sequence` 인자로 `Sequence` 프로토콜을 채택하는 값을 넘겨주어야 한다.
+이니셜라이저는 한 개의 인자를 받는다.
+
+- `sequence` : 발행할 요소가 담긴 시퀀스
+
+`sequence`는 `Sequence` 프로토콜을 채택해야 한다. 에러 타입은 `Error` 프로토콜을 채택해야 한다.
 
 Publisher가 시퀀스에 있는 요소들을 모두 사용하였을 때 다음 요청에서 Publisher가 종료한다.
 
@@ -29,7 +33,7 @@ Publishers.Sequence<[Int], Never>(sequence: [1, 2])
 
 ## RxSwift
 
-Observable 생성 오퍼레이터 `from`을 사용하여 구현할 수 있다.
+`from` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 Observable.from([1, 2])
@@ -49,7 +53,7 @@ Observable.from([1, 2])
 
 ## ReactiveSwift
 
-`SignalProduer`의 이니셜라이저 중 인자로 `Sequence` 프로토콜을 채택하는 값을 넘겨주는 `init(_:)`을 사용하여 구현할 수 있다.
+`init(_:)` 이니셜라이저를 사용하여 구현할 수 있다.
 
 ```swift
 SignalProducer([1, 2])

@@ -2,11 +2,13 @@
 
 **제네릭 구조체** | 중첩된 Publisher들을 평평하게 펴주는 Publisher
 
-이니셜라이저는 Publisher를 요소로 전달받는 Publisher, 다시 말해서 중첩된 Publisher를 받는다.
+이니셜라이저는 한 개의 인자를 받는다.
+
+- `upstream` : 상위에 흐르는 Publisher
 
 예를 들어 `Publisher<Publisher<Data, NSError>, Never>` 타입의 Publisher에 해당 Publisher를 적용하면 `Publisher<Data, NSError>` 타입의 Publisher를 얻을 수 있다.
 
-`switchToLatest()` 오퍼레이터는 해당 Publisher를 반환한다.
+`switchToLatest` 오퍼레이터와 관련이 있다.
 
 ```swift
 // 1 : Publishers.SwitchToLatest Publisher

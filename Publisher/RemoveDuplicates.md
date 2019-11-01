@@ -2,21 +2,21 @@
 
 **제네릭 구조체** | 이전 요소와 일치하지 않는 요소만 발행하는 Publisher
 
-발행되려는 요소가 이전에 발행된 것과 일치한다면 해당 요소를 발행하지 않는다.
-
 이니셜라이저는 두 개의 인자를 받는다.
 
 - `upstream` : 상위에 흐르는 Publisher
-- `predicate` : 두 요소가 중복되었는지 평가하기 위한 클로저. 
+- `predicate` : 두 요소가 중복되었는지 평가하기 위한 클로저.
+
+발행되려는 요소가 이전에 발행된 것과 일치한다면 해당 요소를 발행하지 않는다.
 
 중복된 값이 들어오는 경우 같은 값을 반복 발행하는 것을 방지하기 위해 사용한다.
 
-`removeDuplicates` 오퍼레이터는 해당 Publisher를 반환한다. 
+`removeDuplicates` 오퍼레이터와 관련이 있다.
 
-해당 오퍼레이터를 사용할 때 Output 타입이 `Equatable` 프로토콜을 구현하고 있다면 별도의 `predicate`를 구현할 필요가 없다.
+해당 오퍼레이터를 사용할 때 Output 타입이 `Equatable` 프로토콜을 구현하고 있다면 `predicate` 클로저를 구현할 필요가 없다.
 
 ```swift
-// 1 : Publishers.RemoveDuplicates Publisher
+// Publishers.RemoveDuplicates Publisher
 Publishers.RemoveDuplicates(upstream: Publishers.Sequence<[Int], Never>(sequence: [1, 2, 2, 2])) { $0 == $1 }
   .sink(receiveCompletion: { completion in
     switch completion {
@@ -30,7 +30,7 @@ Publishers.RemoveDuplicates(upstream: Publishers.Sequence<[Int], Never>(sequence
   })
   .store(in: &cancellables)
 
-// 2 : removeDuplicates Operator
+// removeDuplicates Operator
 Publishers.Sequence<[Int], Never>(sequence: [1, 2, 2, 2])
   .removeDuplicates()
   .sink(receiveCompletion: { completion in
@@ -54,9 +54,7 @@ Publishers.Sequence<[Int], Never>(sequence: [1, 2, 2, 2])
 
 ## RxSwift
 
-Observable 필터링 오퍼레이터 `distinctUntilChanged`를 사용하여 구현할 수 있다.
-
-Element 타입이 `Equatable` 프로토콜을 구현하고 있다면 별도의 중복 처리 로직을 구현할 필요가 없다.
+`distinctUntilChanged` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 Observable.from([1, 2, 2, 2])
@@ -78,8 +76,6 @@ Observable.from([1, 2, 2, 2])
 ## ReactiveSwift
 
 `skipRepeats` 오퍼레이터를 사용하여 구현할 수 있다.
-
-Element 타입이 `Equatable` 프로토콜을 구현하고 있다면 별도의 중복 처리 로직을 구현할 필요가 없다.
 
 ```swift
 SignalProducer([1, 2, 2, 2])

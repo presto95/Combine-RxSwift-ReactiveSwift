@@ -12,7 +12,7 @@ Result가 success 케이스인 경우 Output을 전달하기 이전에 적어도
 
 `Just` Publisher와 비교하여, 해당 Publisher는 값을 전달하는 대신 에러를 내며 종료할 수 있다.
 
-`Optional.Publisher`와 비교하여, 해당 Publisher는 에러를 내며 종료하더라도 항상 하나의 값을 전달한다.
+`Optional.Publisher`와 비교하여, 해당 Publisher는 항상 하나의 값을 전달하며, 그렇지 않다면 에러를 내며 종료한다.
 
 Result 타입의 `publisher` 프로퍼티를 통해 `Result.Publisher` 구조체를 만들 수 있다.
 
@@ -67,10 +67,29 @@ Result.success(Void())
 
 // Combine Result
 // Combine Result Finish
+
+// 4
+Result.failure(error)
+.publisher
+  .sink(receiveCompletion: { completion in
+    switch completion {
+    case .failure:
+      print("Combine Result Error")
+    case .finished:
+      print("Combine Result Finish")
+    }
+  }, receiveValue: {
+    print("Combine Result")
+  })
+  .store(in: &cancellables)
+
+// Combine Result Error
 ```
 
 1의 코드는 인자로 success 케이스가 들어갔으므로 해당 값을 내고 종료한다.
 
 2의 코드는 인자로 failure 케이스가 들어갔으므로 에러를 낸다.
 
-3의 코드는 Result 타입에서 `publisher` 프로퍼티를 통해 `Result.Publisher`에 접근하였고, 1의 코드와 같은 동작을 한다.
+3의 코드는 Result 타입에서 `publisher` 프로퍼티를 통해 `Result.Publisher`를 만들었고, 1의 코드와 같은 동작을 한다.
+
+4의 코드는 Result 타입에서 `publisher` 프로퍼티를 통해 `Result.Publisher`를 만들었고, 2의 코드와 같은 동작을 한다.

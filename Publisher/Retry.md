@@ -9,10 +9,10 @@
 
 예를 들어 특정 네트워크 요청이 성공할 때까지 다시 요청하려 한다면 이 동작을 사용할 수 있다.
 
-`retry(_:)` 오퍼레이터는 해당 Publisher를 반환한다.
+`retry` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.Retry Publisher
+// Publishers.Retry Publisher
 Publishers.Retry(upstream: Fail<Void, Error>(error: error), retries: 2)
   .sink(receiveCompletion: { completion in
     switch completion {
@@ -26,7 +26,7 @@ Publishers.Retry(upstream: Fail<Void, Error>(error: error), retries: 2)
   })
   .store(in: &cancellables)
 
-// 2 : retry(_:) Operator
+// retry Operator
 Fail<Void, Error>(error: error)
   .retry(2)
   .sink(receiveCompletion: { completion in
@@ -52,11 +52,7 @@ Fail<Void, Error>(error: error)
 
 ## RxSwift
 
-Observable 오류 처리 오퍼레이터 `retry`를 사용하여 구현할 수 있다.
-
-Combine과 ReactiveSwift의 `retry`과는 다르게, 인자로 넘겨준 재시도 횟수가 첫 시도를 포함한다.
-
-예를 들어 `retry(2)`를 명시한 경우 첫 시도에서 에러가 발생한 후 한 번 재시도하고, 또 에러가 나면 재시도하지 않고 에러를 낸다.
+`retry` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 Observable<Void>.error(error)

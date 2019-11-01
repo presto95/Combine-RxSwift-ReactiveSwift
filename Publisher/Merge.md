@@ -8,16 +8,13 @@
 
 두 개의 스트림을 하나로 합쳐 하나의 스트림을 다루는 것처럼 하기 위해 사용할 수 있다.
 
-`merge(with:)` 오퍼레이터는 다음의 Publisher를 반환한다.
-
-- 인자에 Subject가 들어가는 경우 `Publishers.MergeMany` Publisher를 반환한다.
-- 인자에 Publisher가 들어가는 경우 `Publishers.Merge` Publisher를 반환한다.
+`merge` 오퍼레이터와 관련이 있다.
 
 ```swift
 let aSubject = PassthroughSubject<Int, Never>()
 let bSubject = PassthroughSubject<Int, Never>()
 
-// 1 : Publishers.Merge Publisher
+// Publishers.Merge Publisher
 Publishers
   .Merge(aSubject, bSubject)
   .sink(receiveCompletion: { completion in
@@ -32,7 +29,7 @@ Publishers
   })
   .store(in: &cancellables)
 
-// 2 : merge(with:) Operator
+// merge Operator
 aSubject
   .merge(with: bSubject)
   .sink(receiveCompletion: { completion in
@@ -47,13 +44,13 @@ aSubject
   })
   .store(in: &cancellables)
 
-// 3
+// 1
 aSubject.send(1)
-// 4
+// 2
 aSubject.send(2)
-// 5
+// 3
 bSubject.send(3)
-// 6
+// 4
 bSubject.send(4)
 
 // Combine Merge : 1
@@ -64,14 +61,14 @@ bSubject.send(4)
 
 코드는 다음과 같이 동작한다.
 
-1. 3의 코드를 실행하여 `aSubject`에 1의 값을 전달한다. 해당 Publisher는 1의 값을 낸다.
-2. 4의 코드를 실행하여 `aSubject`에 2의 값을 전달한다. 해당 Publisher는 2의 값을 낸다.
-3. 5의 코드를 실행하여 `bSubject`에 3의 값을 전달한다. 해당 Publisher는 3의 값을 낸다.
-4. 6의 코드를 실행하여 `bSubject`에 4의 값을 전달한다. 해당 Publisher는 4의 값을 낸다.
+1. 1의 코드를 실행하여 `aSubject`에 1의 값을 전달한다. 해당 Publisher는 1의 값을 낸다.
+2. 2의 코드를 실행하여 `aSubject`에 2의 값을 전달한다. 해당 Publisher는 2의 값을 낸다.
+3. 3의 코드를 실행하여 `bSubject`에 3의 값을 전달한다. 해당 Publisher는 3의 값을 낸다.
+4. 4의 코드를 실행하여 `bSubject`에 4의 값을 전달한다. 해당 Publisher는 4의 값을 낸다.
 
 ## RxSwift
 
-Observable 결합 오퍼레이터 `merge`를 사용하여 구현할 수 있다.
+`merge` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 let aSubject = PublishSubject<Int>()

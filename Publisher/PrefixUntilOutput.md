@@ -2,22 +2,20 @@
 
 **제네릭 구조체**
 
-현재 문서화는 되어 있지 않다.
-
-다른 Publisher가 값을 낼 때까지 기존 Publisher가 요소를 발행하는 동작을 구현하기 위해 사용한다.
-
 이니셜라이저는 두 개의 인자를 받는다.
 
 - `upstream` : 상위에 흐르는 Publisher
-- `other` : 첫 출력이 `upstream` Publisher가 종료하게 하는 Publisher
+- `other` : 첫 출력이 `upstream` Publisher를 종료하게 하는 Publisher
 
-`prefix(untilOutputFrom:)` 오퍼레이터는 해당 Publisher를 반환한다.
+다른 Publisher가 값을 낼 때까지 기존 Publisher가 요소를 발행하는 동작을 구현하기 위해 사용한다.
+
+`prefix` 오퍼레이터와 관련이 있다.
 
 ```swift
 let sourceSubject = PassthroughSubject<Int, Never>()
 let otherSubject = PassthroughSubject<Int, Never>()
 
-// 1 : Publishers.PrefixUntilOutput Publisher
+// Publishers.PrefixUntilOutput Publisher
 Publishers
   .PrefixUntilOutput(upstream: sourceSubject, other: otherSubject)
     .sink(receiveCompletion: { completion in
@@ -32,7 +30,7 @@ Publishers
   })
   .store(in: &cancellables)
 
-// 2 : prefix(untilOutputFrom:) Operator
+// prefix Operator
 sourceSubject
   .prefix(untilOutputFrom: otherSubject)
   .sink(receiveCompletion: { completion in
@@ -47,26 +45,26 @@ sourceSubject
   })
   .store(in: &cancellables)
 
-// 3
+// 1
 sourceSubject.send(1)
-// 4
+// 2
 otherSubject.send(2)
-// 5
+// 3
 sourceSubject.send(3)
 
 // Combine PrefixUntilOutput : 1
 // Combine PrefixUntilOutput Finish
 ```
 
-3의 코드를 실행하면 `sourceSubject`에 1의 값을 전달하며, `otherSubject`가 값을 발행한 적이 없으므로 그대로 1의 값을 낸다.
+코드는 다음과 같은 순서로 동작한다.
 
-4의 코드를 실행하면 `otherSubject`에 2의 값을 전달한다. 이 때 `sourceSubject`는 다른 Publisher가 값을 전달받았으므로 종료한다.
-
-5의 코드를 실행하면 `sourceSubject`에 3의 값을 전달한다. 하지만 `sourceSubject`는 4의 코드의 실행에 의해 이미 종료하였으므로 효력이 없다.
+1. 1의 코드를 실행하면 `sourceSubject`에 1의 값을 전달하며, `otherSubject`가 값을 발행한 적이 없으므로 그대로 1의 값을 낸다.
+2. 2의 코드를 실행하면 `otherSubject`에 2의 값을 전달한다. 이 때 `sourceSubject`는 다른 Publisher가 값을 전달받았으므로 종료한다.
+3. 3의 코드를 실행하면 `sourceSubject`에 3의 값을 전달한다. 하지만 `sourceSubject`는 4의 코드의 실행에 의해 이미 종료하였으므로 효력이 없다.
 
 ## RxSwift
 
-Observable 필터링 오퍼레이터 `takeUntil`을 사용하여 구현할 수 있다.
+`takeUntil` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 let sourceSubject = PublishSubject<Int>()
@@ -93,7 +91,7 @@ sourceSubject.onNext(3)
 
 ## ReactiveSwift
 
-`take(until:)` 오퍼레이터를 사용하여 구현할 수 있다.
+`take` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 let sourceProperty = MutableProperty(0)

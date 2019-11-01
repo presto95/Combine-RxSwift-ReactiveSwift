@@ -12,7 +12,7 @@
 URLSession의 `dataTaskPublisher` 메소드로 해당 Publisher를 만들 수 있다. 해당 메소드는 URL 또는 URLRequest 객체를 인자로 받는다.
 
 ```swift
-// 1
+// URLSession.DataTaskPublisher Publisher
 let session = URLSession.shared
 let request = URLRequest(url: url)
 URLSession.DataTaskPublisher(request: request, session: session)
@@ -28,7 +28,7 @@ URLSession.DataTaskPublisher(request: request, session: session)
   })
   .store(in: &cancellables)
 
-// 2
+// dataTaskPublisher Property
 URLSession.shared.dataTaskPublisher(for: url)
   .sink(receiveCompletion: { completion in
     switch completion {

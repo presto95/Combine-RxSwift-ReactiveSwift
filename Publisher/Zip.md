@@ -8,15 +8,13 @@
 
 인자에 들어가는 모든 Publisherd의 에러 타입은 같아야 한다.
 
-다른 하나의 Publisher를 인자로 받는 `zip(_:)` 오퍼레이터는 해당 Publisher를 반환한다. 이 때 조합 결과는 튜플의 형태로 발행된다.
-
-다른 하나의 Publisher를 인자로 받고 transform 클로저를 명시한 `zip(_:_:)` 오퍼레이터는 `Publishers.Map` Publisher를 반환한다.
+`zip` 오퍼레이터와 관련이 있다.
 
 ```swift
 let aSubject = PassthroughSubject<Int, Never>()
 let bSubject = PassthroughSubject<String, Never>()
 
-// 1 : Publishers.Zip Publisher
+// 1. Publishers.Zip Publisher
 Publishers
   .Zip(aSubject, bSubject)
   .sink(receiveCompletion: { completion in
@@ -34,7 +32,7 @@ Publishers
 // Combine Zip : (1, "a")
 // Combine Zip : (2, "b")
 
-// 2 : zip(_:) Operator
+// 2. zip Operator
 aSubject
   .zip(bSubject)
   .sink(receiveCompletion: { completion in
@@ -52,7 +50,7 @@ aSubject
 // Combine Zip : (1, "a")
 // Combine Zip : (2, "b")
 
-// 3 : zip(_:_:) Operator
+// 3. zip Operator
 aSubject
   .zip(bSubject) { "\($0)\($1)" }
   .sink(receiveCompletion: { completion in
@@ -102,7 +100,7 @@ Int 타입 값을 받는 `aSubject`와 String 타입 값을 받는 `bSubject`를
 
 ## RxSwift
 
-Observable 결합 오퍼레이터 `zip`을 사용하여 구현할 수 있다.
+`zip` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 let aSubject = PublishSubject<Int>()

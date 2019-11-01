@@ -24,7 +24,7 @@ Emtpy는 값을 내지 않으므로 `receiveValue` 클로저에서는 동작을 
 
 ## RxSwift
 
-Observable 생성 오퍼레이터 `error`를 사용하여 구현할 수 있다.
+`error` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 Observable<Void>.error(error)
@@ -34,11 +34,9 @@ Observable<Void>.error(error)
 // RxSwift Fail Error
 ```
 
-Combine과 같이 값을 내지 않으므로 `onNext` 클로저에서는 동작을 확인할 수 없고, `onError` 클로저에서 에러를 내는 동작을 확인할 수 있다.
-
 ## ReactiveSwift
 
-`SignalProducer`의 이니셜라이저 중 `init(error:)` 이니셜라이저를 사용하여 구현할 수 있다.
+`init(error:)` 이니셜라이저를 사용하여 구현할 수 있다.
 
 ```swift
 SignalProducer<Void, Error>(error: error)

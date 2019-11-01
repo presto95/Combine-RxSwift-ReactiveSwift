@@ -9,13 +9,10 @@
 - `upstream` : 상위에 흐르는 Publisher
 - `predicate` : 요소 발행을 계속해야 하는지 결정하는 클로저
 
-`prefix(while:)` 오퍼레이터는 다음의 Publisher를 반환한다.
-
-- `Publishers.Sequence` Publisher를 반환한다.
-- 해당 Publisher를 반환한다.
+`prefix` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.PrefixWhile Publisher
+// Publishers.PrefixWhile Publisher
 Publishers
   .PrefixWhile(upstream: Publishers.Sequence<[Int], Never>(sequence: [1, 2, 3])) { $0 < 3 }
   .sink(receiveCompletion: { completion in
@@ -30,7 +27,7 @@ Publishers
   })
   .store(in: &cancellables)
 
-// 2 : prefix(while:) Operator
+// prefix Operator
 Publishers.Sequence<[Int], Never>(sequence: [1, 2, 3])
   .prefix { $0 < 3 }
   .sink(receiveCompletion: { completion in
@@ -58,7 +55,7 @@ Publishers.Sequence<[Int], Never>(sequence: [1, 2, 3])
 
 ## RxSwift
 
-Observable 필터링 오퍼레이터 `takeWhile`을 사용하여 구현할 수 있다.
+`takeWhile` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 Observable.from([1, 2, 3])
@@ -79,7 +76,7 @@ Observable.from([1, 2, 3])
 
 ## ReactiveSwift
 
-`take(while:)` 오퍼레이터를 사용하여 구현할 수 있다.
+`take` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 SignalProducer([1, 2, 3])

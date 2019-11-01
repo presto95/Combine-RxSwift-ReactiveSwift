@@ -10,20 +10,17 @@
 
 여러 개의 스트림을 하나로 합쳐 하나의 스트림을 다루는 것처럼 하기 위해 사용할 수 있다.
 
-`merge(with:)` 오퍼레이터는 다음의 Publisher를 반환한다.
-
-- 인자에 Subject가 들어가는 경우 `Publishers.MergeMany` Publisher를 반환한다.
-- 인자에 Publisher가 들어가는 경우 `Publishers.Merge` Publisher를 반환한다.
+`merge` 오퍼레이터와 관련이 있다. 해당 Publisher를 반환한다.
 
 `Publishers.Merge`와 취할 수 있는 Publisher의 개수만 다를 뿐 동작은 같다.
 
 ## RxSwift
 
-Observable 결합 오퍼레이터 `merge`를 사용하여 구현할 수 있다.
+`merge` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ## ReactiveSwift
 
-ReactiveSwift는 세 개 이상의 스트림에 대한 `merge` 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
+세 개 이상의 스트림에 대한 `merge` 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
 
 ## 참고
 

@@ -71,191 +71,191 @@ struct Just: Publisher {
 |Publisher|관련 Operator|
 |---|---|
 |[Sequence](./Sequence.md)|-|
-|[Catch](./Catch.md)|`catch(_:)`|
+|[Catch](./Catch.md)|`catch`|
 
 #### Working with Subscribers
 
 |Publisher|관련 Operator|
 |---|---|
-|[ReceiveOn](./ReceiveOn.md)|`receive(on:options:)`|
-|[SubscribeOn](./SubscribeOn.md)|`subscribe(on:options:)`|
+|[ReceiveOn](./ReceiveOn.md)|`receive`|
+|[SubscribeOn](./SubscribeOn.md)|`subscribe`|
 
 #### Mapping Elements
 
 |Publisher|관련 Operator|
 |---|---|
-|[TryScan](./TryScan.md)|`tryScan(_:_:)`|
-|[TryMap](./TryMap.md)|`tryMap(_:)`|
-|FlatMap|`flatMap(maxPublishers:_:)`|
-|[Map](./Map.md)|`map(_:)` / `replaceNil(with:)` / `combineLatest` 패밀리 / `zip` 패밀리|
-|[MapError](./MapError.md)|`mapError(_:)`|
-|[Scan](./Scan.md)|`scan(_:_:)`|
-|[SetFailureType](./SetFailureType.md)|`setFailureType(to:)`|
+|[TryScan](./TryScan.md)|`tryScan`|
+|[TryMap](./TryMap.md)|`tryMap`|
+|FlatMap|`flatMap`|
+|[Map](./Map.md)|`map` / `replaceNil` / `combineLatest` / `zip`|
+|[MapError](./MapError.md)|`mapError`|
+|[Scan](./Scan.md)|`scan`|
+|[SetFailureType](./SetFailureType.md)|`setFailureType`|
 
 #### Filtering Elements
 
 |Publisher|관련 Operator|
 |---|---|
-|[CompactMap](./CompactMap.md)|`compactMap(_:)`|
-|[Filter](./Filter.md)|`filter(_:)`|
-|[RemoveDuplicates](./RemoveDuplicates.md)|`removeDuplicates` 패밀리|
-|[ReplaceEmpty](./ReplaceEmpty.md)|`replaceEmpty(with:)`|
-|[ReplaceError](./ReplaceError.md)|`replaceError(with:)`|
-|[TryCompactMap](./TryCompactMap.md)|`tryCompactMap(_:)`|
-|[TryFilter](./TryFilter.md)|`tryFilter(_:)`|
-|[TryRemoveDuplicates](./TryRemoveDuplicates.md)|`tryRemoveDuplicates(_:)`|
+|[CompactMap](./CompactMap.md)|`compactMap`|
+|[Filter](./Filter.md)|`filter`|
+|[RemoveDuplicates](./RemoveDuplicates.md)|`removeDuplicates`|
+|[ReplaceEmpty](./ReplaceEmpty.md)|`replaceEmpty`|
+|[ReplaceError](./ReplaceError.md)|`replaceError`|
+|[TryCompactMap](./TryCompactMap.md)|`tryCompactMap`|
+|[TryFilter](./TryFilter.md)|`tryFilter`|
+|[TryRemoveDuplicates](./TryRemoveDuplicates.md)|`tryRemoveDuplicates`|
 
 #### Reducing Elements
 
 |Publisher|관련 Operator|
 |---|---|
-|[Collect](./Collect.md)|`collect()`|
-|[CollectByCount](./CollectByCount.md)|`collect(_:)`|
-|[CollectByTime](./CollectByTime.md)|`collect(_:options:)`|
-|[IgnoreOutput](./IgnoreOutput.md)|`ignoreOutput()`|
-|[Reduce](./Reduce)|`reduce(_:_:)`|
-|[TryReduce](./TryReduce.md)|`tryReduce(_:_:)`|
+|[Collect](./Collect.md)|`collect`|
+|[CollectByCount](./CollectByCount.md)|`collect`|
+|[CollectByTime](./CollectByTime.md)|`collect`|
+|[IgnoreOutput](./IgnoreOutput.md)|`ignoreOutput`|
+|[Reduce](./Reduce)|`reduce`|
+|[TryReduce](./TryReduce.md)|`tryReduce`|
 
 #### Applying Mathematical Operations on Elements
 
 |Publisher|관련 Operator|
 |---|---|
-|[Comparison](./Comparison.md)|`max` 패밀리 / `min` 패밀리|
-|[TryComparison](./TryComparison.md)|`tryMax(_:)` / `tryMin(_:)`|
-|[Count](./Count.md)|`count()`|
+|[Comparison](./Comparison.md)|`max` / `min`|
+|[TryComparison](./TryComparison.md)|`tryMax` / `tryMin`|
+|[Count](./Count.md)|`count`|
 
 #### Applying Matching Criteria to Elements
 
 |Publisher|관련 Operator|
 |---|---|
-|[TryAllSatisfy](./TryAllSatisfy.md)|`tryAllSatisfy(_:)`|
-|[AllSatisfy](./AllSatisfy.md)|`allSatisfy(_:)`|
-|[Contains](./Contains.md)|`contains(_:)`|
-|[ContainsWhere](./ContainsWhere.md)|`contains(where:)`|
-|[TryContainsWhere](./TryContainsWhere.md)|`tryContains(where:)`|
+|[TryAllSatisfy](./TryAllSatisfy.md)|`tryAllSatisfy`|
+|[AllSatisfy](./AllSatisfy.md)|`allSatisfy`|
+|[Contains](./Contains.md)|`contains`|
+|[ContainsWhere](./ContainsWhere.md)|`contains`|
+|[TryContainsWhere](./TryContainsWhere.md)|`tryContains`|
 
 #### Applying Sequence Operations to Elements
 
 |Publisher|관련 Operator|
 |---|---|
-|[FirstWhere](./FirstWhere.md)|`first(where:)`|
-|[LastWhere](./LastWhere.md)|`last(where:)`|
-|[DropUntilOutput](./DropUntilOutput.md)|`drop(untilOutputFrom:)`|
-|[DropWhile](./DropWhile.md)|`drop(while:)`|
-|[TryDropWhile](./TryDropWhile.md)|`tryDrop(while:)`|
-|[Concatenate](./Concatenate.md)|`append` 패밀리 / `prepend` 패밀리|
-|[Drop](./Drop.md)|`dropFirst(_:)`|
-|[PrefixUntilOutput](./PrefixUntilOutput.md)|`prefix(untilOutputFrom:)`|
-|[PrefixWhile](./PrefixWhile.md)|`prefix(while:)`|
-|[First](./First.md)|`first()`|
-|[Last](./Last.md)|`last()`|
-|[TryFirstWhere](./TryFirstWhere.md)|`tryFirst(where:)`|
-|[TryLastWhere](./TryLastWhere.md)|`tryLast(where:)`|
-|[TryPrefixWhile](./TryPrefixWhere.md)|`tryPrefix(while:)`|
-|[Output](./Output.md)|`output` 패밀리|
+|[FirstWhere](./FirstWhere.md)|`first`|
+|[LastWhere](./LastWhere.md)|`last`|
+|[DropUntilOutput](./DropUntilOutput.md)|`drop`|
+|[DropWhile](./DropWhile.md)|`drop`|
+|[TryDropWhile](./TryDropWhile.md)|`tryDrop`|
+|[Concatenate](./Concatenate.md)|`append` / `prepend`|
+|[Drop](./Drop.md)|`dropFirst`|
+|[PrefixUntilOutput](./PrefixUntilOutput.md)|`prefix`|
+|[PrefixWhile](./PrefixWhile.md)|`prefix`|
+|[First](./First.md)|`first`|
+|[Last](./Last.md)|`last`|
+|[TryFirstWhere](./TryFirstWhere.md)|`tryFirst`|
+|[TryLastWhere](./TryLastWhere.md)|`tryLast`|
+|[TryPrefixWhile](./TryPrefixWhere.md)|`tryPrefix`|
+|[Output](./Output.md)|`output`|
 
 #### Combining Elements from Multiple Publishers
 
 |Publisher|관련 Operator|
 |---|---|
-|[CombineLatest](./CombineLatest.md)|`combineLatest(_:)` / `combineLatest(_:_:)`|
-|[CombineLatest3](./CombineLatest3.md)|`combineLatest(_:_:)` / `combineLatest(_:_:_:)`|
-|[CombineLatest4](./CombineLatest4.md)|`combineLatest(_:_:_:)` / `combineLatest(_:_:_:_:)`|
-|[Merge](./Merge.md)|`merge(with:)`|
-|[Merge3](./Merge3.md)|`merge(with:_:)`|
-|[Merge4](./Merge4.md)|`merge(with:_:_:)`|
-|[Merge5](./Merge5.md)|`merge(with:_:_:_:)`|
-|[Merge6](./Merge6.md)|`merge(with:_:_:_:_:)`|
-|[Merge7](./Merge7.md)|`merge(with:_:_:_:_:_:)`|
-|[Merge8](./Merge8.md)|`merge(with:_:_:_:_:_:_:)`|
-|[MergeMany](./MergeMany.md)|`merge(with:)`|
-|[Zip](./Zip.md)|`zip(_:)` / `zip(_:_:)`|
-|[Zip3](./Zip3.md)|`zip(_:_:)` / `zip(_:_:_:)`|
-|[Zip4](./Zip4.md)|`zip(_:_:_:)` / `zip(_:_:_:_:)`|
+|[CombineLatest](./CombineLatest.md)|`combineLatest`|
+|[CombineLatest3](./CombineLatest3.md)|`combineLatest`|
+|[CombineLatest4](./CombineLatest4.md)|`combineLatest`|
+|[Merge](./Merge.md)|`merge`|
+|[Merge3](./Merge3.md)|`merge`|
+|[Merge4](./Merge4.md)|`merge`|
+|[Merge5](./Merge5.md)|`merge`|
+|[Merge6](./Merge6.md)|`merge`|
+|[Merge7](./Merge7.md)|`merge`|
+|[Merge8](./Merge8.md)|`merge`|
+|[MergeMany](./MergeMany.md)|`merge`|
+|[Zip](./Zip.md)|`zip`|
+|[Zip3](./Zip3.md)|`zip`|
+|[Zip4](./Zip4.md)|`zip`|
 
 #### Handling Errors
 
 |Publisher|관련 Operator|
 |---|---|
-|[AssertNoFailure](./AssertNoFailure.md)|`assertNoFailure(_:file:line:)`|
-|[Catch](./Catch.md)|`catch(_:)`|
-|[TryCatch](./TryCatch.md)|`tryCatch(_:)`|
-|[Retry](./Retry.md)|`retry(_:)`|
+|[AssertNoFailure](./AssertNoFailure.md)|`assertNoFailure`|
+|[Catch](./Catch.md)|`catch`|
+|[TryCatch](./TryCatch.md)|`tryCatch`|
+|[Retry](./Retry.md)|`retry`|
 
 #### Adapting Publisher Types
 
 |Publisher|관련 Operator|
 |---|---|
-|[SwitchToLatest](./SwitchToLatest.md)|`switchToLatest()`|
+|[SwitchToLatest](./SwitchToLatest.md)|`switchToLatest`|
 
 #### Controlling Timing
 
 |Publisher|관련 Operator|
 |---|---|
-|Debounce|`debounce(for:scheduler:options:)`|
-|Delay|`delay(for:tolerance:scheduler:options:)`|
-|MeasureInterval|`measureInterval(using:options:)`|
-|Throttle|`throttle(for:scheduler:latest:)`|
-|Timeout|`timeout(_:scheduler:options:customError:)`|
+|Debounce|`debounce`|
+|Delay|`delay`|
+|MeasureInterval|`measureInterval`|
+|Throttle|`throttle`|
+|Timeout|`timeout`|
 
 #### Creating Reference-type Publishers
 
 |Publisher|관련 Operator|
 |---|---|
-|Share|`share()`|
+|Share|`share`|
 
 #### Encoding and Decoding
 
 |Publisher|관련 Operator|
 |---|---|
-|Encode|`encode(encoder:)`|
-|Decode|`decode(type:decoder:)`|
+|Encode|`encode`|
+|Decode|`decode`|
 
 #### Identifying Properties with Key Paths
 
 |Publisher|관련 Operator|
 |---|---|
-|MapKeyPath|`map(_:)`|
-|MapKeyPath2|`map(_:_:)`|
-|MapKeyPath3|`map(_:_:_:)`|
+|MapKeyPath|`map`|
+|MapKeyPath2|`map`|
+|MapKeyPath3|`map`|
 
 #### Using Explicit Publisher Connections
 
 |Publisher|관련 Operator|
 |---|---|
-|Autoconnect|`autoconnect()`|
+|Autoconnect|`autoconnect`|
 
 #### Working with Multiple Subscribers
 
 |Publisher|관련 Operator|
 |---|---|
-|Multicast|`multicast` 패밀리|
+|Multicast|`multicast`|
 
 #### Buffering Elements
 
 |Publisher|관련 Operator|
 |---|---|
-|Buffer|`buffer(size:prefetch:whenFull:)`|
+|Buffer|`buffer`|
 
 #### Adding Explicit Connectability
 
 |Publisher|관련 Operator|
 |---|---|
-|MakeConnectable|`makeConnectable()`|
+|MakeConnectable|`makeConnectable`|
 
 #### Debugging
 
 |Publisher|관련 Operator|
 |---|---|
-|Breakpoint|`breakpoint(receiveSubscription:receiveOutput:receiveCompletion:)`<br />`breakpointOnError()`|
-|[HandleEvents](./HandleEvents.md)|`handleEvents(receiveSubscription:receiveOutput:receiveCompletion:receiveCancel:receiveRequest:)`|
-|[Print](./Print.md)|`print(_:to:)`|
+|Breakpoint|`breakpoint` / `breakpointOnError`|
+|[HandleEvents](./HandleEvents.md)|`handleEvents`|
+|[Print](./Print.md)|`print`|
 
 ### Misc.
 
 | Publisher | 관련 Operator |
 | --------- | ------------- |
-|[AnyPublisher](./AnyPublisher.md)|`eraseToAnyPublisher()`|
+|[AnyPublisher](./AnyPublisher.md)|`eraseToAnyPublisher`|
 |NotificationCenter.Publisher|-|
 |[Optional.Publisher](./Optional.Publisher.md)|-|
 |[Result.Publisher](./Result.Publisher.md)|-|

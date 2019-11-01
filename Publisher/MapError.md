@@ -2,19 +2,19 @@
 
 **제네릭 구조체** | 상위에 흐르는 Publisher의 어떠한 실패를 새로운 에러로 변환하는 Publisher
 
-제공하는 클로저에서 에러를 변환하는 작업을 수행할 수 있다.
-
 이니셜라이저는 두 개의 인자를 받는다.
 
-- `upstream` : `Publisher` 프로토콜을 따르는 Publisher를 넘겨준다.
-- `transform` : 상위에 흐르는 Publisher의 실패를 새로운 에러로 변환하는 클로저를 넘겨준다.
+- `upstream` : 상위에 흐르는 Publisher
+- `transform` : 상위에 흐르는 Publisher의 실패를 새로운 에러로 변환하는 클로저
+
+`upstream` Publisher의 에러 타입은 `Error`다.
 
 에러를 변환하기 위해 사용한다. 에러를 처리하는 것이 아니므로 상위에 흐르는 Publisher가 에러를 내고 별도의 에러 처리 작업이 없다면 에러를 내며 종료하게 된다.
 
-`mapError` 오퍼레이터는 해당 Publisher를 반환한다.
+`mapError` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.MapError Publisher
+// Publishers.MapError Publisher
 Publishers.MapError(upstream: Fail<Void, NSError>(error: error), { $0 as Error })
   .sink(receiveCompletion: { completion in
     switch completion {
@@ -28,7 +28,7 @@ Publishers.MapError(upstream: Fail<Void, NSError>(error: error), { $0 as Error }
   })
   .store(in: &cancellables)
 
-// 2 : mapError Operator
+// mapError Operator
 Fail(error: error)
   .mapError { $0 as Error }
   .sink(receiveCompletion: { completion in

@@ -9,17 +9,17 @@
 
 시퀀스에서 nil 값을 없애는 등의 작업을 하고 싶으며 작업이 에러를 던질 수 있을 때 사용할 수 있다.
 
-`tryCompactMap` 오퍼레이터는 해당 Publisher를 반환한다.
+`tryCompactMap` 오퍼레이터와 관련이 있다.
 
 `Publishers.CompactMap`의 동작과 같으나 동작을 수행하다가 에러를 낼 수 있다는 차이가 있다.
 
 ## RxSwift
 
-Observable 필터링 오퍼레이터 `compactMap`을 사용하여 구현할 수 있다.
+`compactMap` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ## ReactiveSwift
 
-ReactiveSwift는 `filterMap`의 동작을 수행할 때 에러를 던질 수 있는 방법을 제공하지 않는다.
+해당 동작을 구현하기 위한 오퍼레이터를 제공하지 않는다.
 
 ## 참고
 

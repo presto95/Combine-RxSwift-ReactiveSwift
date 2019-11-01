@@ -9,13 +9,10 @@
 
 조건에 맞지 않을 때까지는 발행된 값을 무시하기 위해 사용한다.
 
-`drop(while:)` 오퍼레이터는 다음의 Publisher를 반환한다.
-
-- `Publishers.Sequence` Publisher를 반환한다.
-- 해당 Publisher를 반환한다.
+`drop` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.DropWhile Publisher
+// Publishers.DropWhile Publisher
 Publishers
   .DropWhile(upstream: Publishers.Sequence<[Int], Never>(sequence: [1, 2, 3])) { $0 < 3 }
   .sink(receiveCompletion: { completion in
@@ -30,7 +27,7 @@ Publishers
   })
   .store(in: &cancellables)
 
-// 2 : drop(while:) Operator
+// drop Operator
 Publishers.Sequence<[Int], Never>(sequence: [1, 2, 3])
   .drop { $0 < 3 }
   .sink(receiveCompletion: { completion in
@@ -49,11 +46,13 @@ Publishers.Sequence<[Int], Never>(sequence: [1, 2, 3])
 // Combine DropWhile Finish
 ```
 
-상위 Publisher가 1, 2, 3의 값을 순서대로 내며, 3 미만일 때까지 발행된 값을 생략하라는 조건에 의해 3의 값을 내고 종료한다.
+상위 Publisher가 1, 2, 3의 값을 순서대로 낸다.
+
+3 미만일 때까지 발행된 값을 생략하라는 조건에 의해 3의 값을 내고 종료한다.
 
 ## RxSwift
 
-Observable 필터링 오퍼레이터 `skipWhile` 를 사용하여 구현할 수 있다.
+`skipWhile` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 Observable.from([1, 2, 3])
@@ -73,7 +72,7 @@ Observable.from([1, 2, 3])
 
 ## ReactiveSwift
 
-`skip(while:)` 오퍼레이터를 사용하여 구현할 수 있다.
+`skip` 오퍼레이터를 사용하여 구현할 수 있다.
 
 ```swift
 SignalProducer([1, 2, 3])

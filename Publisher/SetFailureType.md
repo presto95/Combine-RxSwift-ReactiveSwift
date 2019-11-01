@@ -2,21 +2,25 @@
 
 **제네릭 구조체** | 특정 실패 타입을 전달하는 것처럼 보이는 Publisher
 
+이니셜라이저는 한 개의 인자를 받는다.
+
+- `upstream` : 상위에 흐르는 Publisher
+
+상위 Publisher의 에러 타입은 `Never`이며, 해당 Publisher의 에러 타입은 `Error` 프로토콜을 채택해야 한다.
+
 이는 실제로 특정 타입의 에러를 내지는 않고 정상적으로 종료하지만, 다른 에러 타입이 맞지 않는 Publisher와 함께 동작하기 위해 에러의 타입을 일치시키기 위해 사용할 수 있다.
 
 예를 들어 1번 Publisher가 에러를 내지 않고 (에러의 타입이 Never) 2번 Publisher가 에러를 내는데 두 개의 Publisher를 조합해야 한다면 1번 Publisher가 2번 Publisher의 에러 타입의 에러를 내는 것처럼 행동하도록 하여 타입을 맞추어 주어야 할 필요가 있을 것이다.
 
 이 때 해당 Publisher를 사용하여 실제로 특정 타입의 에러를 내지는 않지만 에러의 타입을 맞춰줄 수 있다.
 
-이니셜라이저로 상위에 흐르는 Publisher를 받는다.
-
-`setFailureType` 오퍼레이터는 해당 Publisher를 반환한다.
+`setFailureType` 오퍼레이터와 관련이 있다.
 
 ```swift
-// 1 : Publishers.SetFailureType Publisher
+// Publishers.SetFailureType Publisher
 Just(Void())
-  .setFailureType(to: SomeError.self)
-  .combineLatest(Fail<Void, SomeError>(error: .some))
+  .setFailureType(to: Error.self)
+  .combineLatest(Fail<Void, Error>(error: error))
   .sink(receiveCompletion: { completion in
     switch completion {
     case .failure:
@@ -29,9 +33,9 @@ Just(Void())
   })
   .store(in: &cancellables)
 
-// 2 : setFailureType Operator
-Publishers.SetFailureType<Just<Void>, SomeError>(upstream: Just(Void()))
-  .combineLatest(Fail<Void, SomeError>(error: .some))
+// setFailureType Operator
+Publishers.SetFailureType<Just<Void>, Error>(upstream: Just(Void()))
+  .combineLatest(Fail<Void, Error>(error: error))
   .sink(receiveCompletion: { completion in
     switch completion {
     case .failure:
@@ -47,7 +51,7 @@ Publishers.SetFailureType<Just<Void>, SomeError>(upstream: Just(Void()))
 // Combine SetFailureType Error
 ```
 
-`Just` Publisher는 에러를 내지 않는 Publisher이지만 `Fail` Publisher와 조합하기 위해 `Fail` Publisher의 에러 타입인 `SomeError` 타입의 에러로 타입을 맞추기 위해 `setFailureType`이 요구하는 에러의 타입에 `SomeError.self`를 명시해 주었다.
+`Just` Publisher는 에러를 내지 않는 Publisher이지만 `Fail` Publisher와 조합하기 위해 `Fail` Publisher의 에러 타입인 `Error` 타입의 에러로 타입을 맞추기 위해 `setFailureType`이 요구하는 에러의 타입에 `Error.self`를 명시해 주었다.
 
 이를 통해 `Just` Publisher와 `Fail` Publisher는 조합이 가능하게 되었다.
 
@@ -55,7 +59,7 @@ Publishers.SetFailureType<Just<Void>, SomeError>(upstream: Just(Void()))
 
 ## RxSwift
 
-RxSwift는 Observable이 에러의 타입을 요구하지 않으므로 이러한 동작을 구현할 필요가 없고, 구현되어 있지도 않다.
+Observable이 에러의 타입을 요구하지 않으므로 이러한 동작을 구현할 필요가 없고, 구현되어 있지도 않다.
 
 ## ReactiveSwift
 
@@ -63,8 +67,8 @@ RxSwift는 Observable이 에러의 타입을 요구하지 않으므로 이러한
 
 ```swift
 SignalProducer(value: Void())
-  .promoteError(SomeError.self)
-  .combineLatest(with: SignalProducer<Void, SomeError>(error: .some))
+  .promoteError(Error.self)
+  .combineLatest(with: SignalProducer<Void, Error>(error: error))
   .start { event in
     switch event {
     case .value:
@@ -77,5 +81,7 @@ SignalProducer(value: Void())
       break
     }
   }
+
+// ReactiveSwift SetFailureType Error
 ```
 
