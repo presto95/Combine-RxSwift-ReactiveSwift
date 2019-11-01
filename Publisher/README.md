@@ -192,11 +192,11 @@ struct Just: Publisher {
 
 |Publisher|관련 Operator|
 |---|---|
-|Debounce|`debounce`|
-|Delay|`delay`|
-|MeasureInterval|`measureInterval`|
-|Throttle|`throttle`|
-|Timeout|`timeout`|
+|[Debounce](./Debounce.md)|`debounce`|
+|[Delay](./Delay.md)|`delay`|
+|[MeasureInterval](./MeasureInterval.md)|`measureInterval`|
+|[Throttle](./Throttle.md)|`throttle`|
+|[Timeout](./Timeout.md)|`timeout`|
 
 #### Creating Reference-type Publishers
 
@@ -247,7 +247,7 @@ struct Just: Publisher {
 
 |Publisher|관련 Operator|
 |---|---|
-|Breakpoint|`breakpoint` / `breakpointOnError`|
+|[Breakpoint](./Breakpoint.md)|`breakpoint` / `breakpointOnError`|
 |[HandleEvents](./HandleEvents.md)|`handleEvents`|
 |[Print](./Print.md)|`print`|
 
