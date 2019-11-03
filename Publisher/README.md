@@ -208,16 +208,16 @@ struct Just: Publisher {
 
 |Publisher|관련 Operator|
 |---|---|
-|Encode|`encode`|
-|Decode|`decode`|
+|[Encode](./Encode.md)|`encode`|
+|[Decode](./Decode.md)|`decode`|
 
 #### Identifying Properties with Key Paths
 
 |Publisher|관련 Operator|
 |---|---|
-|MapKeyPath|`map`|
-|MapKeyPath2|`map`|
-|MapKeyPath3|`map`|
+|[MapKeyPath](./MapKeyPath.md)|`map`|
+|[MapKeyPath2](./MapKeyPath2.md)|`map`|
+|[MapKeyPath3](./MapKeyPath3.md)|`map`|
 
 #### Using Explicit Publisher Connections
 
@@ -260,3 +260,4 @@ struct Just: Publisher {
 |[Optional.Publisher](./Optional.Publisher.md)|-|
 |[Result.Publisher](./Result.Publisher.md)|-|
 |[URLSession.DataTaskPublisher](./URLSession.DataTaskPublisher.md)|-|
+|Timer.TimerPublisher|-|

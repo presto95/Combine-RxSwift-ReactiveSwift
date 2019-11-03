@@ -8,7 +8,7 @@
 
 세 개의 스트림을 하나로 합쳐 하나의 스트림을 다루는 것처럼 하기 위해 사용할 수 있다.
 
-`merge` 오퍼레이터d와 관련이 있다. 해당 Publisher를 반환한다.
+`merge` 오퍼레이터와 관련이 있다. 해당 Publisher를 반환한다.
 
 `Publishers.Merge`와 취할 수 있는 Publisher의 개수만 다를 뿐 동작은 같다.
 
